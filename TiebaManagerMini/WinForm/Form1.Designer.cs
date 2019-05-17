@@ -29,17 +29,23 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            "抢沙发",
+            "否",
+            "<=4",
+            "=2"}, -1);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.dateTimePicker_sheZhi_tingZhiShiJian = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker_sheZhi_kaiShiShiJian = new System.Windows.Forms.DateTimePicker();
             this.label28 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
             this.textBox_sheZhi_huiFuDengJiQiang = new System.Windows.Forms.TextBox();
-            this.checkBox__sheZhi_huiFuDengJiQiang = new System.Windows.Forms.CheckBox();
+            this.checkBox_sheZhi_huiFuDengJiQiang = new System.Windows.Forms.CheckBox();
             this.label25 = new System.Windows.Forms.Label();
             this.textBox_sheZhi_zhuTiDengJiQiang = new System.Windows.Forms.TextBox();
             this.checkBox_sheZhi_zhuTiDengJiQiang = new System.Windows.Forms.CheckBox();
@@ -65,21 +71,41 @@
             this.button_sheZhi_kaiShi = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label17 = new System.Windows.Forms.Label();
-            this.textBox_guanJianCi_neiRongDengJi = new System.Windows.Forms.TextBox();
-            this.checkBox_guanJianCi_neiRongDengJi = new System.Windows.Forms.CheckBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.textBox_guanJianCi_biaoTiDengJi = new System.Windows.Forms.TextBox();
-            this.checkBox_guanJianCi_biaoTiDengJi = new System.Windows.Forms.CheckBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.listView_guanJianCi_neiRongGuanJianCi = new System.Windows.Forms.ListView();
+            this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader15 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.cms_neiRongGuanJianCi = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.添加cms_neiRongGuanJianCi = new System.Windows.Forms.ToolStripMenuItem();
+            this.编辑cms_neiRongGuanJianCi = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.删除cms_neiRongGuanJianCi = new System.Windows.Forms.ToolStripMenuItem();
+            this.listView_guanJianCi_biaoTiGuanJianCi = new System.Windows.Forms.ListView();
+            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.cms_biaoTiGuanJianCi = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.添加cms_biaoTiGuanJianCi = new System.Windows.Forms.ToolStripMenuItem();
+            this.编辑cms_biaoTiGuanJianCi = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+            this.删除cms_biaoTiGuanJianCi = new System.Windows.Forms.ToolStripMenuItem();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox_guanJianCi_neiRongGuanJianCi = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox_guanJianCi_biaoTiGuanJianCi = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label14 = new System.Windows.Forms.Label();
+            this.listView_mingDan_heiMingDan = new System.Windows.Forms.ListView();
+            this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.cms_heiMingDan = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.添加cms_heiMingDan = new System.Windows.Forms.ToolStripMenuItem();
+            this.编辑cms_heiMingDan = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.删除cms_heiMingDan = new System.Windows.Forms.ToolStripMenuItem();
             this.linkLabel_mingDan_daoRuBaWuTuanDui = new System.Windows.Forms.LinkLabel();
             this.label7 = new System.Windows.Forms.Label();
             this.textBox_mingDan_baiMingDan = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
-            this.textBox_mingDan_heiMingDan = new System.Windows.Forms.TextBox();
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.label10 = new System.Windows.Forms.Label();
             this.checkBox_wbgl_kaiQiWenBenGuoLv = new System.Windows.Forms.CheckBox();
@@ -120,16 +146,16 @@
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.listView_guanJianCi_biaoTiGuanJianCi = new System.Windows.Forms.ListView();
-            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.登录.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.cms_neiRongGuanJianCi.SuspendLayout();
+            this.cms_biaoTiGuanJianCi.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.cms_heiMingDan.SuspendLayout();
             this.tabPage7.SuspendLayout();
             this.cms_wenBenGuoLv.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -172,22 +198,34 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.label13);
             this.groupBox4.Controls.Add(this.dateTimePicker_sheZhi_tingZhiShiJian);
             this.groupBox4.Controls.Add(this.dateTimePicker_sheZhi_kaiShiShiJian);
             this.groupBox4.Controls.Add(this.label28);
             this.groupBox4.Controls.Add(this.label27);
             this.groupBox4.Controls.Add(this.label26);
             this.groupBox4.Controls.Add(this.textBox_sheZhi_huiFuDengJiQiang);
-            this.groupBox4.Controls.Add(this.checkBox__sheZhi_huiFuDengJiQiang);
+            this.groupBox4.Controls.Add(this.checkBox_sheZhi_huiFuDengJiQiang);
             this.groupBox4.Controls.Add(this.label25);
             this.groupBox4.Controls.Add(this.textBox_sheZhi_zhuTiDengJiQiang);
             this.groupBox4.Controls.Add(this.checkBox_sheZhi_zhuTiDengJiQiang);
             this.groupBox4.Location = new System.Drawing.Point(6, 278);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(222, 106);
+            this.groupBox4.Size = new System.Drawing.Size(222, 127);
             this.groupBox4.TabIndex = 24;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "等级墙";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.ForeColor = System.Drawing.Color.Green;
+            this.label13.Location = new System.Drawing.Point(9, 105);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(173, 12);
+            this.label13.TabIndex = 47;
+            this.label13.Text = "注意：等级墙只删除当天的帖子";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // dateTimePicker_sheZhi_tingZhiShiJian
             // 
@@ -247,15 +285,15 @@
             this.textBox_sheZhi_huiFuDengJiQiang.TabIndex = 39;
             this.textBox_sheZhi_huiFuDengJiQiang.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // checkBox__sheZhi_huiFuDengJiQiang
+            // checkBox_sheZhi_huiFuDengJiQiang
             // 
-            this.checkBox__sheZhi_huiFuDengJiQiang.AutoSize = true;
-            this.checkBox__sheZhi_huiFuDengJiQiang.Location = new System.Drawing.Point(11, 50);
-            this.checkBox__sheZhi_huiFuDengJiQiang.Name = "checkBox__sheZhi_huiFuDengJiQiang";
-            this.checkBox__sheZhi_huiFuDengJiQiang.Size = new System.Drawing.Size(72, 16);
-            this.checkBox__sheZhi_huiFuDengJiQiang.TabIndex = 38;
-            this.checkBox__sheZhi_huiFuDengJiQiang.Text = "禁止低于";
-            this.checkBox__sheZhi_huiFuDengJiQiang.UseVisualStyleBackColor = true;
+            this.checkBox_sheZhi_huiFuDengJiQiang.AutoSize = true;
+            this.checkBox_sheZhi_huiFuDengJiQiang.Location = new System.Drawing.Point(11, 50);
+            this.checkBox_sheZhi_huiFuDengJiQiang.Name = "checkBox_sheZhi_huiFuDengJiQiang";
+            this.checkBox_sheZhi_huiFuDengJiQiang.Size = new System.Drawing.Size(72, 16);
+            this.checkBox_sheZhi_huiFuDengJiQiang.TabIndex = 38;
+            this.checkBox_sheZhi_huiFuDengJiQiang.Text = "禁止低于";
+            this.checkBox_sheZhi_huiFuDengJiQiang.UseVisualStyleBackColor = true;
             // 
             // label25
             // 
@@ -481,9 +519,9 @@
             // 
             // button_sheZhi_tingZhi
             // 
-            this.button_sheZhi_tingZhi.Location = new System.Drawing.Point(123, 399);
+            this.button_sheZhi_tingZhi.Location = new System.Drawing.Point(123, 411);
             this.button_sheZhi_tingZhi.Name = "button_sheZhi_tingZhi";
-            this.button_sheZhi_tingZhi.Size = new System.Drawing.Size(92, 36);
+            this.button_sheZhi_tingZhi.Size = new System.Drawing.Size(92, 30);
             this.button_sheZhi_tingZhi.TabIndex = 12;
             this.button_sheZhi_tingZhi.TabStop = false;
             this.button_sheZhi_tingZhi.Text = "停 止";
@@ -492,9 +530,9 @@
             // 
             // button_sheZhi_kaiShi
             // 
-            this.button_sheZhi_kaiShi.Location = new System.Drawing.Point(17, 399);
+            this.button_sheZhi_kaiShi.Location = new System.Drawing.Point(17, 411);
             this.button_sheZhi_kaiShi.Name = "button_sheZhi_kaiShi";
-            this.button_sheZhi_kaiShi.Size = new System.Drawing.Size(92, 36);
+            this.button_sheZhi_kaiShi.Size = new System.Drawing.Size(92, 30);
             this.button_sheZhi_kaiShi.TabIndex = 4;
             this.button_sheZhi_kaiShi.TabStop = false;
             this.button_sheZhi_kaiShi.Text = "开 始";
@@ -504,15 +542,11 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.label17);
-            this.tabPage2.Controls.Add(this.textBox_guanJianCi_neiRongDengJi);
-            this.tabPage2.Controls.Add(this.checkBox_guanJianCi_neiRongDengJi);
-            this.tabPage2.Controls.Add(this.label14);
-            this.tabPage2.Controls.Add(this.textBox_guanJianCi_biaoTiDengJi);
-            this.tabPage2.Controls.Add(this.checkBox_guanJianCi_biaoTiDengJi);
+            this.tabPage2.Controls.Add(this.label15);
+            this.tabPage2.Controls.Add(this.listView_guanJianCi_neiRongGuanJianCi);
+            this.tabPage2.Controls.Add(this.listView_guanJianCi_biaoTiGuanJianCi);
             this.tabPage2.Controls.Add(this.label6);
-            this.tabPage2.Controls.Add(this.textBox_guanJianCi_neiRongGuanJianCi);
             this.tabPage2.Controls.Add(this.label5);
-            this.tabPage2.Controls.Add(this.textBox_guanJianCi_biaoTiGuanJianCi);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -524,58 +558,158 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(187, 235);
+            this.label17.ForeColor = System.Drawing.Color.Green;
+            this.label17.Location = new System.Drawing.Point(175, 235);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(41, 12);
-            this.label17.TabIndex = 37;
-            this.label17.Text = "级删帖";
-            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label17.Size = new System.Drawing.Size(53, 12);
+            this.label17.TabIndex = 44;
+            this.label17.Text = "右键操作";
             // 
-            // textBox_guanJianCi_neiRongDengJi
+            // label15
             // 
-            this.textBox_guanJianCi_neiRongDengJi.Location = new System.Drawing.Point(163, 232);
-            this.textBox_guanJianCi_neiRongDengJi.Name = "textBox_guanJianCi_neiRongDengJi";
-            this.textBox_guanJianCi_neiRongDengJi.Size = new System.Drawing.Size(22, 21);
-            this.textBox_guanJianCi_neiRongDengJi.TabIndex = 36;
-            this.textBox_guanJianCi_neiRongDengJi.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.label15.AutoSize = true;
+            this.label15.ForeColor = System.Drawing.Color.Green;
+            this.label15.Location = new System.Drawing.Point(175, 13);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(53, 12);
+            this.label15.TabIndex = 43;
+            this.label15.Text = "右键操作";
             // 
-            // checkBox_guanJianCi_neiRongDengJi
+            // listView_guanJianCi_neiRongGuanJianCi
             // 
-            this.checkBox_guanJianCi_neiRongDengJi.AutoSize = true;
-            this.checkBox_guanJianCi_neiRongDengJi.Location = new System.Drawing.Point(82, 234);
-            this.checkBox_guanJianCi_neiRongDengJi.Name = "checkBox_guanJianCi_neiRongDengJi";
-            this.checkBox_guanJianCi_neiRongDengJi.Size = new System.Drawing.Size(84, 16);
-            this.checkBox_guanJianCi_neiRongDengJi.TabIndex = 35;
-            this.checkBox_guanJianCi_neiRongDengJi.Text = "当等级低于";
-            this.checkBox_guanJianCi_neiRongDengJi.UseVisualStyleBackColor = true;
+            this.listView_guanJianCi_neiRongGuanJianCi.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader10,
+            this.columnHeader11,
+            this.columnHeader14,
+            this.columnHeader15});
+            this.listView_guanJianCi_neiRongGuanJianCi.ContextMenuStrip = this.cms_neiRongGuanJianCi;
+            this.listView_guanJianCi_neiRongGuanJianCi.FullRowSelect = true;
+            this.listView_guanJianCi_neiRongGuanJianCi.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1});
+            this.listView_guanJianCi_neiRongGuanJianCi.Location = new System.Drawing.Point(6, 259);
+            this.listView_guanJianCi_neiRongGuanJianCi.MultiSelect = false;
+            this.listView_guanJianCi_neiRongGuanJianCi.Name = "listView_guanJianCi_neiRongGuanJianCi";
+            this.listView_guanJianCi_neiRongGuanJianCi.Size = new System.Drawing.Size(222, 180);
+            this.listView_guanJianCi_neiRongGuanJianCi.TabIndex = 42;
+            this.listView_guanJianCi_neiRongGuanJianCi.UseCompatibleStateImageBehavior = false;
+            this.listView_guanJianCi_neiRongGuanJianCi.View = System.Windows.Forms.View.Details;
             // 
-            // label14
+            // columnHeader10
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(187, 13);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(41, 12);
-            this.label14.TabIndex = 34;
-            this.label14.Text = "级删帖";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.columnHeader10.Text = "关键词";
+            this.columnHeader10.Width = 90;
             // 
-            // textBox_guanJianCi_biaoTiDengJi
+            // columnHeader11
             // 
-            this.textBox_guanJianCi_biaoTiDengJi.Location = new System.Drawing.Point(163, 10);
-            this.textBox_guanJianCi_biaoTiDengJi.Name = "textBox_guanJianCi_biaoTiDengJi";
-            this.textBox_guanJianCi_biaoTiDengJi.Size = new System.Drawing.Size(22, 21);
-            this.textBox_guanJianCi_biaoTiDengJi.TabIndex = 33;
-            this.textBox_guanJianCi_biaoTiDengJi.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader11.Text = "正则";
+            this.columnHeader11.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader11.Width = 40;
             // 
-            // checkBox_guanJianCi_biaoTiDengJi
+            // columnHeader14
             // 
-            this.checkBox_guanJianCi_biaoTiDengJi.AutoSize = true;
-            this.checkBox_guanJianCi_biaoTiDengJi.Location = new System.Drawing.Point(82, 12);
-            this.checkBox_guanJianCi_biaoTiDengJi.Name = "checkBox_guanJianCi_biaoTiDengJi";
-            this.checkBox_guanJianCi_biaoTiDengJi.Size = new System.Drawing.Size(84, 16);
-            this.checkBox_guanJianCi_biaoTiDengJi.TabIndex = 32;
-            this.checkBox_guanJianCi_biaoTiDengJi.Text = "当等级低于";
-            this.checkBox_guanJianCi_biaoTiDengJi.UseVisualStyleBackColor = true;
+            this.columnHeader14.Text = "等级";
+            this.columnHeader14.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader14.Width = 40;
+            // 
+            // columnHeader15
+            // 
+            this.columnHeader15.Text = "楼层";
+            this.columnHeader15.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader15.Width = 40;
+            // 
+            // cms_neiRongGuanJianCi
+            // 
+            this.cms_neiRongGuanJianCi.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.添加cms_neiRongGuanJianCi,
+            this.编辑cms_neiRongGuanJianCi,
+            this.toolStripSeparator1,
+            this.删除cms_neiRongGuanJianCi});
+            this.cms_neiRongGuanJianCi.Name = "cms_wenbenguolv";
+            this.cms_neiRongGuanJianCi.Size = new System.Drawing.Size(101, 76);
+            this.cms_neiRongGuanJianCi.Opening += new System.ComponentModel.CancelEventHandler(this.Cms_neiRongGuanJianCi_Opening);
+            // 
+            // 添加cms_neiRongGuanJianCi
+            // 
+            this.添加cms_neiRongGuanJianCi.Name = "添加cms_neiRongGuanJianCi";
+            this.添加cms_neiRongGuanJianCi.Size = new System.Drawing.Size(100, 22);
+            this.添加cms_neiRongGuanJianCi.Text = "添加";
+            // 
+            // 编辑cms_neiRongGuanJianCi
+            // 
+            this.编辑cms_neiRongGuanJianCi.Name = "编辑cms_neiRongGuanJianCi";
+            this.编辑cms_neiRongGuanJianCi.Size = new System.Drawing.Size(100, 22);
+            this.编辑cms_neiRongGuanJianCi.Text = "编辑";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(97, 6);
+            // 
+            // 删除cms_neiRongGuanJianCi
+            // 
+            this.删除cms_neiRongGuanJianCi.Name = "删除cms_neiRongGuanJianCi";
+            this.删除cms_neiRongGuanJianCi.Size = new System.Drawing.Size(100, 22);
+            this.删除cms_neiRongGuanJianCi.Text = "删除";
+            // 
+            // listView_guanJianCi_biaoTiGuanJianCi
+            // 
+            this.listView_guanJianCi_biaoTiGuanJianCi.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader8,
+            this.columnHeader9});
+            this.listView_guanJianCi_biaoTiGuanJianCi.ContextMenuStrip = this.cms_biaoTiGuanJianCi;
+            this.listView_guanJianCi_biaoTiGuanJianCi.FullRowSelect = true;
+            this.listView_guanJianCi_biaoTiGuanJianCi.Location = new System.Drawing.Point(6, 37);
+            this.listView_guanJianCi_biaoTiGuanJianCi.MultiSelect = false;
+            this.listView_guanJianCi_biaoTiGuanJianCi.Name = "listView_guanJianCi_biaoTiGuanJianCi";
+            this.listView_guanJianCi_biaoTiGuanJianCi.Size = new System.Drawing.Size(222, 180);
+            this.listView_guanJianCi_biaoTiGuanJianCi.TabIndex = 40;
+            this.listView_guanJianCi_biaoTiGuanJianCi.UseCompatibleStateImageBehavior = false;
+            this.listView_guanJianCi_biaoTiGuanJianCi.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader8
+            // 
+            this.columnHeader8.Text = "关键词";
+            this.columnHeader8.Width = 170;
+            // 
+            // columnHeader9
+            // 
+            this.columnHeader9.Text = "正则";
+            this.columnHeader9.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader9.Width = 40;
+            // 
+            // cms_biaoTiGuanJianCi
+            // 
+            this.cms_biaoTiGuanJianCi.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.添加cms_biaoTiGuanJianCi,
+            this.编辑cms_biaoTiGuanJianCi,
+            this.toolStripMenuItem3,
+            this.删除cms_biaoTiGuanJianCi});
+            this.cms_biaoTiGuanJianCi.Name = "cms_wenbenguolv";
+            this.cms_biaoTiGuanJianCi.Size = new System.Drawing.Size(101, 76);
+            this.cms_biaoTiGuanJianCi.Opening += new System.ComponentModel.CancelEventHandler(this.Cms_biaoTiGuanJianCi_Opening);
+            // 
+            // 添加cms_biaoTiGuanJianCi
+            // 
+            this.添加cms_biaoTiGuanJianCi.Name = "添加cms_biaoTiGuanJianCi";
+            this.添加cms_biaoTiGuanJianCi.Size = new System.Drawing.Size(100, 22);
+            this.添加cms_biaoTiGuanJianCi.Text = "添加";
+            // 
+            // 编辑cms_biaoTiGuanJianCi
+            // 
+            this.编辑cms_biaoTiGuanJianCi.Name = "编辑cms_biaoTiGuanJianCi";
+            this.编辑cms_biaoTiGuanJianCi.Size = new System.Drawing.Size(100, 22);
+            this.编辑cms_biaoTiGuanJianCi.Text = "编辑";
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(97, 6);
+            // 
+            // 删除cms_biaoTiGuanJianCi
+            // 
+            this.删除cms_biaoTiGuanJianCi.Name = "删除cms_biaoTiGuanJianCi";
+            this.删除cms_biaoTiGuanJianCi.Size = new System.Drawing.Size(100, 22);
+            this.删除cms_biaoTiGuanJianCi.Text = "删除";
             // 
             // label6
             // 
@@ -587,16 +721,6 @@
             this.label6.TabIndex = 12;
             this.label6.Text = "内容关键词";
             // 
-            // textBox_guanJianCi_neiRongGuanJianCi
-            // 
-            this.textBox_guanJianCi_neiRongGuanJianCi.Location = new System.Drawing.Point(6, 257);
-            this.textBox_guanJianCi_neiRongGuanJianCi.Multiline = true;
-            this.textBox_guanJianCi_neiRongGuanJianCi.Name = "textBox_guanJianCi_neiRongGuanJianCi";
-            this.textBox_guanJianCi_neiRongGuanJianCi.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox_guanJianCi_neiRongGuanJianCi.Size = new System.Drawing.Size(222, 180);
-            this.textBox_guanJianCi_neiRongGuanJianCi.TabIndex = 11;
-            this.textBox_guanJianCi_neiRongGuanJianCi.TabStop = false;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -607,23 +731,14 @@
             this.label5.TabIndex = 8;
             this.label5.Text = "标题关键词";
             // 
-            // textBox_guanJianCi_biaoTiGuanJianCi
-            // 
-            this.textBox_guanJianCi_biaoTiGuanJianCi.Location = new System.Drawing.Point(6, 35);
-            this.textBox_guanJianCi_biaoTiGuanJianCi.Multiline = true;
-            this.textBox_guanJianCi_biaoTiGuanJianCi.Name = "textBox_guanJianCi_biaoTiGuanJianCi";
-            this.textBox_guanJianCi_biaoTiGuanJianCi.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox_guanJianCi_biaoTiGuanJianCi.Size = new System.Drawing.Size(222, 180);
-            this.textBox_guanJianCi_biaoTiGuanJianCi.TabIndex = 7;
-            this.textBox_guanJianCi_biaoTiGuanJianCi.TabStop = false;
-            // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.label14);
+            this.tabPage3.Controls.Add(this.listView_mingDan_heiMingDan);
             this.tabPage3.Controls.Add(this.linkLabel_mingDan_daoRuBaWuTuanDui);
             this.tabPage3.Controls.Add(this.label7);
             this.tabPage3.Controls.Add(this.textBox_mingDan_baiMingDan);
             this.tabPage3.Controls.Add(this.label16);
-            this.tabPage3.Controls.Add(this.textBox_mingDan_heiMingDan);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Size = new System.Drawing.Size(234, 448);
@@ -631,18 +746,89 @@
             this.tabPage3.Text = "名单";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.ForeColor = System.Drawing.Color.Green;
+            this.label14.Location = new System.Drawing.Point(175, 13);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(53, 12);
+            this.label14.TabIndex = 42;
+            this.label14.Text = "右键操作";
+            // 
+            // listView_mingDan_heiMingDan
+            // 
+            this.listView_mingDan_heiMingDan.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader12,
+            this.columnHeader13});
+            this.listView_mingDan_heiMingDan.ContextMenuStrip = this.cms_heiMingDan;
+            this.listView_mingDan_heiMingDan.FullRowSelect = true;
+            this.listView_mingDan_heiMingDan.Location = new System.Drawing.Point(6, 37);
+            this.listView_mingDan_heiMingDan.MultiSelect = false;
+            this.listView_mingDan_heiMingDan.Name = "listView_mingDan_heiMingDan";
+            this.listView_mingDan_heiMingDan.Size = new System.Drawing.Size(222, 180);
+            this.listView_mingDan_heiMingDan.TabIndex = 41;
+            this.listView_mingDan_heiMingDan.UseCompatibleStateImageBehavior = false;
+            this.listView_mingDan_heiMingDan.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader12
+            // 
+            this.columnHeader12.Text = "关键词";
+            this.columnHeader12.Width = 170;
+            // 
+            // columnHeader13
+            // 
+            this.columnHeader13.Text = "正则";
+            this.columnHeader13.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader13.Width = 40;
+            // 
+            // cms_heiMingDan
+            // 
+            this.cms_heiMingDan.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.添加cms_heiMingDan,
+            this.编辑cms_heiMingDan,
+            this.toolStripSeparator2,
+            this.删除cms_heiMingDan});
+            this.cms_heiMingDan.Name = "cms_wenbenguolv";
+            this.cms_heiMingDan.Size = new System.Drawing.Size(101, 76);
+            this.cms_heiMingDan.Opening += new System.ComponentModel.CancelEventHandler(this.Cms_heiMingDan_Opening);
+            // 
+            // 添加cms_heiMingDan
+            // 
+            this.添加cms_heiMingDan.Name = "添加cms_heiMingDan";
+            this.添加cms_heiMingDan.Size = new System.Drawing.Size(100, 22);
+            this.添加cms_heiMingDan.Text = "添加";
+            // 
+            // 编辑cms_heiMingDan
+            // 
+            this.编辑cms_heiMingDan.Name = "编辑cms_heiMingDan";
+            this.编辑cms_heiMingDan.Size = new System.Drawing.Size(100, 22);
+            this.编辑cms_heiMingDan.Text = "编辑";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(97, 6);
+            // 
+            // 删除cms_heiMingDan
+            // 
+            this.删除cms_heiMingDan.Name = "删除cms_heiMingDan";
+            this.删除cms_heiMingDan.Size = new System.Drawing.Size(100, 22);
+            this.删除cms_heiMingDan.Text = "删除";
+            // 
             // linkLabel_mingDan_daoRuBaWuTuanDui
             // 
             this.linkLabel_mingDan_daoRuBaWuTuanDui.ActiveLinkColor = System.Drawing.SystemColors.WindowText;
             this.linkLabel_mingDan_daoRuBaWuTuanDui.AutoSize = true;
+            this.linkLabel_mingDan_daoRuBaWuTuanDui.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.linkLabel_mingDan_daoRuBaWuTuanDui.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel_mingDan_daoRuBaWuTuanDui.LinkColor = System.Drawing.SystemColors.WindowText;
-            this.linkLabel_mingDan_daoRuBaWuTuanDui.Location = new System.Drawing.Point(151, 235);
+            this.linkLabel_mingDan_daoRuBaWuTuanDui.Location = new System.Drawing.Point(127, 235);
             this.linkLabel_mingDan_daoRuBaWuTuanDui.Name = "linkLabel_mingDan_daoRuBaWuTuanDui";
-            this.linkLabel_mingDan_daoRuBaWuTuanDui.Size = new System.Drawing.Size(77, 12);
+            this.linkLabel_mingDan_daoRuBaWuTuanDui.Size = new System.Drawing.Size(101, 12);
             this.linkLabel_mingDan_daoRuBaWuTuanDui.TabIndex = 17;
             this.linkLabel_mingDan_daoRuBaWuTuanDui.TabStop = true;
-            this.linkLabel_mingDan_daoRuBaWuTuanDui.Text = "导入吧务团队";
+            this.linkLabel_mingDan_daoRuBaWuTuanDui.Text = "点我导入吧务名单";
             this.linkLabel_mingDan_daoRuBaWuTuanDui.VisitedLinkColor = System.Drawing.SystemColors.WindowText;
             this.linkLabel_mingDan_daoRuBaWuTuanDui.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
@@ -658,7 +844,7 @@
             // 
             // textBox_mingDan_baiMingDan
             // 
-            this.textBox_mingDan_baiMingDan.Location = new System.Drawing.Point(6, 257);
+            this.textBox_mingDan_baiMingDan.Location = new System.Drawing.Point(6, 259);
             this.textBox_mingDan_baiMingDan.Multiline = true;
             this.textBox_mingDan_baiMingDan.Name = "textBox_mingDan_baiMingDan";
             this.textBox_mingDan_baiMingDan.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -675,16 +861,6 @@
             this.label16.Size = new System.Drawing.Size(77, 12);
             this.label16.TabIndex = 14;
             this.label16.Text = "用户名关键词";
-            // 
-            // textBox_mingDan_heiMingDan
-            // 
-            this.textBox_mingDan_heiMingDan.Location = new System.Drawing.Point(6, 35);
-            this.textBox_mingDan_heiMingDan.Multiline = true;
-            this.textBox_mingDan_heiMingDan.Name = "textBox_mingDan_heiMingDan";
-            this.textBox_mingDan_heiMingDan.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox_mingDan_heiMingDan.Size = new System.Drawing.Size(222, 180);
-            this.textBox_mingDan_heiMingDan.TabIndex = 13;
-            this.textBox_mingDan_heiMingDan.TabStop = false;
             // 
             // tabPage7
             // 
@@ -703,7 +879,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.ForeColor = System.Drawing.Color.Blue;
-            this.label10.Location = new System.Drawing.Point(175, 13);
+            this.label10.Location = new System.Drawing.Point(175, 14);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(53, 12);
             this.label10.TabIndex = 28;
@@ -782,7 +958,6 @@
             // 
             // tabPage5
             // 
-            this.tabPage5.Controls.Add(this.listView_guanJianCi_biaoTiGuanJianCi);
             this.tabPage5.Controls.Add(this.listBox_xinXiShuChu);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
@@ -863,17 +1038,19 @@
             // 
             this.columnHeader2.DisplayIndex = 1;
             this.columnHeader2.Text = "内容";
-            this.columnHeader2.Width = 270;
+            this.columnHeader2.Width = 250;
             // 
             // columnHeader3
             // 
             this.columnHeader3.DisplayIndex = 2;
             this.columnHeader3.Text = "作者";
+            this.columnHeader3.Width = 80;
             // 
             // columnHeader4
             // 
             this.columnHeader4.DisplayIndex = 3;
             this.columnHeader4.Text = "发帖时间";
+            this.columnHeader4.Width = 80;
             // 
             // textBox_liuLanQi_yeMa
             // 
@@ -1014,7 +1191,6 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(288, 39);
             this.pictureBox1.Name = "pictureBox1";
@@ -1074,29 +1250,6 @@
             this.notifyIcon1.Visible = true;
             this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
             // 
-            // listView_guanJianCi_biaoTiGuanJianCi
-            // 
-            this.listView_guanJianCi_biaoTiGuanJianCi.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader8,
-            this.columnHeader9});
-            this.listView_guanJianCi_biaoTiGuanJianCi.FullRowSelect = true;
-            this.listView_guanJianCi_biaoTiGuanJianCi.Location = new System.Drawing.Point(40, 35);
-            this.listView_guanJianCi_biaoTiGuanJianCi.Name = "listView_guanJianCi_biaoTiGuanJianCi";
-            this.listView_guanJianCi_biaoTiGuanJianCi.Size = new System.Drawing.Size(222, 180);
-            this.listView_guanJianCi_biaoTiGuanJianCi.TabIndex = 39;
-            this.listView_guanJianCi_biaoTiGuanJianCi.UseCompatibleStateImageBehavior = false;
-            this.listView_guanJianCi_biaoTiGuanJianCi.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader8
-            // 
-            this.columnHeader8.Text = "关键词";
-            this.columnHeader8.Width = 140;
-            // 
-            // columnHeader9
-            // 
-            this.columnHeader9.Text = "是否正则";
-            this.columnHeader9.Width = 70;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1125,8 +1278,11 @@
             this.登录.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.cms_neiRongGuanJianCi.ResumeLayout(false);
+            this.cms_biaoTiGuanJianCi.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            this.cms_heiMingDan.ResumeLayout(false);
             this.tabPage7.ResumeLayout(false);
             this.tabPage7.PerformLayout();
             this.cms_wenBenGuoLv.ResumeLayout(false);
@@ -1154,10 +1310,8 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox_guanJianCi_biaoTiGuanJianCi;
         private System.Windows.Forms.Button button_sheZhi_tingZhi;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox_guanJianCi_neiRongGuanJianCi;
         private System.Windows.Forms.TabControl tabControl2;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.TabPage tabPage6;
@@ -1193,7 +1347,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox textBox_mingDan_baiMingDan;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox textBox_mingDan_heiMingDan;
         private System.Windows.Forms.LinkLabel linkLabel_mingDan_daoRuBaWuTuanDui;
         private System.Windows.Forms.CheckBox checkBox_liuLanQi_daoXuChaKan;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
@@ -1219,16 +1372,10 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ListBox listBox_xinXiShuChu;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.TextBox textBox_guanJianCi_neiRongDengJi;
-        private System.Windows.Forms.CheckBox checkBox_guanJianCi_neiRongDengJi;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox textBox_guanJianCi_biaoTiDengJi;
-        private System.Windows.Forms.CheckBox checkBox_guanJianCi_biaoTiDengJi;
         private System.Windows.Forms.Button button_gaoJi_neiRongGuanJianCiBianLiang;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.TextBox textBox_sheZhi_huiFuDengJiQiang;
-        private System.Windows.Forms.CheckBox checkBox__sheZhi_huiFuDengJiQiang;
+        private System.Windows.Forms.CheckBox checkBox_sheZhi_huiFuDengJiQiang;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.TextBox textBox_sheZhi_zhuTiDengJiQiang;
         private System.Windows.Forms.CheckBox checkBox_sheZhi_zhuTiDengJiQiang;
@@ -1241,6 +1388,33 @@
         private System.Windows.Forms.ListView listView_guanJianCi_biaoTiGuanJianCi;
         private System.Windows.Forms.ColumnHeader columnHeader8;
         private System.Windows.Forms.ColumnHeader columnHeader9;
+        private System.Windows.Forms.ListView listView_guanJianCi_neiRongGuanJianCi;
+        private System.Windows.Forms.ColumnHeader columnHeader10;
+        private System.Windows.Forms.ColumnHeader columnHeader11;
+        private System.Windows.Forms.ListView listView_mingDan_heiMingDan;
+        private System.Windows.Forms.ColumnHeader columnHeader12;
+        private System.Windows.Forms.ColumnHeader columnHeader13;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ColumnHeader columnHeader14;
+        private System.Windows.Forms.ColumnHeader columnHeader15;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.ContextMenuStrip cms_biaoTiGuanJianCi;
+        private System.Windows.Forms.ToolStripMenuItem 添加cms_biaoTiGuanJianCi;
+        private System.Windows.Forms.ToolStripMenuItem 编辑cms_biaoTiGuanJianCi;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem 删除cms_biaoTiGuanJianCi;
+        private System.Windows.Forms.ContextMenuStrip cms_heiMingDan;
+        private System.Windows.Forms.ToolStripMenuItem 添加cms_heiMingDan;
+        private System.Windows.Forms.ToolStripMenuItem 编辑cms_heiMingDan;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem 删除cms_heiMingDan;
+        private System.Windows.Forms.ContextMenuStrip cms_neiRongGuanJianCi;
+        private System.Windows.Forms.ToolStripMenuItem 添加cms_neiRongGuanJianCi;
+        private System.Windows.Forms.ToolStripMenuItem 编辑cms_neiRongGuanJianCi;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem 删除cms_neiRongGuanJianCi;
     }
 }
 

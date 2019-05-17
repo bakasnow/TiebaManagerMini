@@ -4,7 +4,7 @@
     {
         //版本号
         public const string Vname = "tmm";
-        public const string Version = "1.6.0(190201)";
+        public const string Version = "1.6.0(190517)";
 
         //运行参数
         public static bool Stop = true;//主线程控制
@@ -27,10 +27,10 @@
         public static string DengJiQiangJieShuShiJian = string.Empty;
 
         //等级限制
-        public static bool QiYongBiaoTiDengJi = false;
-        public static int BiaoTiDengJi = 0;
-        public static bool QiYongNeiRongDengJi = false;
-        public static int NeiRongDengJi = 0;
+        //public static bool QiYongBiaoTiDengJi = false;
+        //public static int BiaoTiDengJi = 0;
+        //public static bool QiYongNeiRongDengJi = false;
+        //public static int NeiRongDengJi = 0;
 
         //全局参数
         public static string Cookie = string.Empty;

@@ -97,10 +97,10 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuanJu.cs" />
-    <Compile Include="WinForm\WenBenGuoLv.cs">
+    <Compile Include="WinForm\CaiDan\WenBenGuoLv.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WinForm\WenBenGuoLv.Designer.cs">
+    <Compile Include="WinForm\CaiDan\WenBenGuoLv.Designer.cs">
       <DependentUpon>WenBenGuoLv.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="WinForm\BaiduLogin.resx">
@@ -119,7 +119,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="WinForm\WenBenGuoLv.resx">
+    <EmbeddedResource Include="WinForm\CaiDan\WenBenGuoLv.resx">
       <DependentUpon>WenBenGuoLv.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
@@ -136,7 +136,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="128.ico" />
-    <None Include="Resources\portrait.jpg" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
@@ -144,6 +143,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.3.3.5\build\Fody.targets" Condition="Exists('..\packages\Fody.3.3.5\build\Fody.targets')" />

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-
+using System.Text.RegularExpressions;
 using BakaSnowTool;
 
 namespace TiebaManagerMini
 {
-    static class Lib
+    public static class Lib
     {
         /// <summary>
         /// 时间判断
@@ -35,7 +35,7 @@ namespace TiebaManagerMini
         {
             DateTime dangqianSj = DateTime.Now;
             DateTime kaishiSj = Convert.ToDateTime(DateTime.Now.ToString($"yyyy-MM-dd {startTime}:00"));
-            DateTime jieshuSj = new DateTime();
+            DateTime jieshuSj;
 
             if (Convert.ToInt32(startTime.Replace(":", "")) <= Convert.ToInt32(stopTime.Replace(":", "")))
             {
@@ -60,7 +60,7 @@ namespace TiebaManagerMini
         {
             DateTime dangqianSj = Convert.ToDateTime(BST.ShiJianChuoDaoWenben(shijianchuo * 1000, "yyyy-MM-dd HH:mm:ss"));
             DateTime kaishiSj = Convert.ToDateTime(DateTime.Now.ToString($"yyyy-MM-dd {startTime}:00"));
-            DateTime jieshuSj = new DateTime();
+            DateTime jieshuSj;
 
             if (Convert.ToInt32(startTime.Replace(":", "")) <= Convert.ToInt32(stopTime.Replace(":", "")))
             {
@@ -126,6 +126,30 @@ namespace TiebaManagerMini
                 {
                     list.RemoveAt(i);
                 }
+            }
+        }
+
+        /// <summary>
+        /// 获取运算符
+        /// </summary>
+        /// <param name="str">原文本</param>
+        /// <param name="yunSuanFu">运算符</param>
+        /// <param name="shuZi">数字</param>
+        /// <returns></returns>
+        public static bool GetYunSuanFu(string str, out string yunSuanFu, out int shuZi)
+        {
+            MatchCollection mc = new Regex("^(<|>|=|>=|<=|!=)([0-9]{1,2})$").Matches(str);
+            if (mc.Count > 0)
+            {
+                yunSuanFu = mc[0].Groups[0].Value;
+                shuZi = Convert.ToInt32(mc[0].Groups[1].Value);
+                return true;
+            }
+            else
+            {
+                yunSuanFu = "";
+                shuZi = 0;
+                return false;
             }
         }
     }

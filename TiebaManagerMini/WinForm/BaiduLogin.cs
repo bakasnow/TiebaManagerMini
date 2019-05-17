@@ -34,7 +34,7 @@ namespace TiebaManagerMini
             if (e.Url.ToString().IndexOf("https://tieba.baidu.com/") != -1)
             {
                 string cookie = GetCookie("https://tieba.baidu.com/");
-                string yhm = TLib.GetBaiduYongHuMing(cookie);
+                string yhm = Tieba.GetBaiduYongHuMing(cookie);
                 if (string.IsNullOrEmpty(yhm))
                 {
                     //失败

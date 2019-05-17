@@ -34,7 +34,7 @@ namespace TiebaManagerMini
             string html, v;
             while (true)
             {
-                html = Http.Get("http://www.bakasnow.com/version.php?n=" + QuanJu.Vname);
+                html = Http.Get("https://www.bakasnow.com/version.php?n=" + QuanJu.Vname);
                 v = BST.JieQuWenBen(html, "<version>", "</version>");
                 if (string.IsNullOrEmpty(v))
                 {
@@ -148,8 +148,8 @@ namespace TiebaManagerMini
             textBox_sheZhi_tiebaName.Text = Convert.ToString(db_tmm.GetDataResult("select 贴吧名 from 基本设置 where id='配置1'"));
             textBox_sheZhi_saoMiaoJianGe.Text = Convert.ToString(db_tmm.GetDataResult("select 扫描间隔 from 基本设置 where id='配置1'"));
             textBox_sheZhi_shanTieJianGe.Text = Convert.ToString(db_tmm.GetDataResult("select 删帖间隔 from 基本设置 where id='配置1'"));
-            textBox_guanJianCi_biaoTiDengJi.Text = Convert.ToString(db_tmm.GetDataResult("select 标题等级 from 基本设置 where id='配置1'"));
-            textBox_guanJianCi_neiRongDengJi.Text = Convert.ToString(db_tmm.GetDataResult("select 内容等级 from 基本设置 where id='配置1'"));
+            //textBox_guanJianCi_biaoTiDengJi.Text = Convert.ToString(db_tmm.GetDataResult("select 标题等级 from 基本设置 where id='配置1'"));
+            //textBox_guanJianCi_neiRongDengJi.Text = Convert.ToString(db_tmm.GetDataResult("select 内容等级 from 基本设置 where id='配置1'"));
             textBox_sheZhi_zhuTiDengJiQiang.Text = Convert.ToString(db_tmm.GetDataResult("select 主题等级墙 from 基本设置 where id='配置1'"));
             textBox_sheZhi_huiFuDengJiQiang.Text = Convert.ToString(db_tmm.GetDataResult("select 回复等级墙 from 基本设置 where id='配置1'"));
             dateTimePicker_sheZhi_kaiShiShiJian.Text = Convert.ToString(db_tmm.GetDataResult("select 等级墙开始时间 from 基本设置 where id='配置1'"));
@@ -160,48 +160,54 @@ namespace TiebaManagerMini
             checkBox_sheZhi_buSaoMiaoLzl.Checked = Convert.ToString(db_tmm.GetDataResult("select 跳过楼中楼 from 基本设置 where id='配置1'")) == "1" ? true : false;
             checkBox_gaoJi_zhiShuChuShanTieRiZhi.Checked = Convert.ToString(db_tmm.GetDataResult("select 只输出删帖日志 from 基本设置 where id='配置1'")) == "1" ? true : false;
             checkBox_wbgl_kaiQiWenBenGuoLv.Checked = Convert.ToString(db_tmm.GetDataResult("select 开启文本过滤 from 基本设置 where id='配置1'")) == "1" ? true : false;
-            checkBox_guanJianCi_biaoTiDengJi.Checked = Convert.ToString(db_tmm.GetDataResult("select 启用标题等级 from 基本设置 where id='配置1'")) == "1" ? true : false;
-            checkBox_guanJianCi_neiRongDengJi.Checked = Convert.ToString(db_tmm.GetDataResult("select 启用内容等级 from 基本设置 where id='配置1'")) == "1" ? true : false;
+            //checkBox_guanJianCi_biaoTiDengJi.Checked = Convert.ToString(db_tmm.GetDataResult("select 启用标题等级 from 基本设置 where id='配置1'")) == "1" ? true : false;
+            //checkBox_guanJianCi_neiRongDengJi.Checked = Convert.ToString(db_tmm.GetDataResult("select 启用内容等级 from 基本设置 where id='配置1'")) == "1" ? true : false;
             checkBox_sheZhi_zhuTiDengJiQiang.Checked = Convert.ToString(db_tmm.GetDataResult("select 启用主题等级墙 from 基本设置 where id='配置1'")) == "1" ? true : false;
-            checkBox__sheZhi_huiFuDengJiQiang.Checked = Convert.ToString(db_tmm.GetDataResult("select 启用回复等级墙 from 基本设置 where id='配置1'")) == "1" ? true : false;
+            checkBox_sheZhi_huiFuDengJiQiang.Checked = Convert.ToString(db_tmm.GetDataResult("select 启用回复等级墙 from 基本设置 where id='配置1'")) == "1" ? true : false;
 
-            DataTable dt = new DataTable();
-            dt = db_tmm.GetDataTable("select 关键词 from 标题关键词");
+            //导入关键词列表
+            DataTable dt = db_tmm.GetDataTable("select * from 标题关键词");
+            listView_guanJianCi_biaoTiGuanJianCi.BeginUpdate();
             foreach (DataRow dr in dt.Rows)
             {
-                if (!string.IsNullOrEmpty(Convert.ToString(dr["关键词"])))
-                {
-                    textBox_guanJianCi_biaoTiGuanJianCi.Text += dr["关键词"].ToString() + "\r\n";
-                }
+                ListViewItem lvi = new ListViewItem();
+                lvi.Text = Convert.ToString(dr["关键词"]);
+                lvi.SubItems.Add(Convert.ToString(dr["是否正则"]));
+                listView_guanJianCi_biaoTiGuanJianCi.Items.Add(lvi);
             }
+            listView_guanJianCi_biaoTiGuanJianCi.EndUpdate();
 
-            dt = db_tmm.GetDataTable("select 关键词 from 内容关键词");
+            dt = db_tmm.GetDataTable("select * from 内容关键词");
+            listView_guanJianCi_neiRongGuanJianCi.BeginUpdate();
             foreach (DataRow dr in dt.Rows)
             {
-                if (!string.IsNullOrEmpty(Convert.ToString(dr["关键词"])))
-                {
-                    textBox_guanJianCi_neiRongGuanJianCi.Text += dr["关键词"].ToString() + "\r\n";
-                }
+                ListViewItem lvi = new ListViewItem();
+                lvi.Text = Convert.ToString(dr["关键词"]);
+                lvi.SubItems.Add(Convert.ToString(dr["是否正则"]));
+                lvi.SubItems.Add(Convert.ToString(dr["触发次数"]));
+                lvi.SubItems.Add(Convert.ToString(dr["最后触发时间"]));
+                listView_guanJianCi_neiRongGuanJianCi.Items.Add(lvi);
             }
+            listView_guanJianCi_neiRongGuanJianCi.EndUpdate();
 
-            dt = db_tmm.GetDataTable("select 用户名 from 用户黑名单");
+            listView_mingDan_heiMingDan.BeginUpdate();
+            dt = db_tmm.GetDataTable("select * from 用户黑名单");
             foreach (DataRow dr in dt.Rows)
             {
-                if (!string.IsNullOrEmpty(Convert.ToString(dr["用户名"])))
-                {
-                    textBox_mingDan_heiMingDan.Text += dr["用户名"].ToString() + "\r\n";
-                }
+                ListViewItem lvi = new ListViewItem();
+                lvi.Text = Convert.ToString(dr["用户名"]);
+                lvi.SubItems.Add(Convert.ToString(dr["是否正则"]));
+                listView_mingDan_heiMingDan.Items.Add(lvi);
             }
+            listView_mingDan_heiMingDan.EndUpdate();
 
-            dt = db_tmm.GetDataTable("select 用户名 from 用户白名单");
+            dt = db_tmm.GetDataTable("select * from 用户白名单");
             foreach (DataRow dr in dt.Rows)
             {
-                if (!string.IsNullOrEmpty(Convert.ToString(dr["用户名"])))
-                {
-                    textBox_mingDan_baiMingDan.Text += dr["用户名"].ToString() + "\r\n";
-                }
+                textBox_mingDan_baiMingDan.AppendText(Convert.ToString(dr["用户名"]) + Environment.NewLine);
             }
             dt.Dispose();
+
 
             //载入文本过滤列表
             GengxinWenbenGuolv();
@@ -212,19 +218,18 @@ namespace TiebaManagerMini
         /// </summary>
         private void Save()
         {
-            string temp = string.Empty;
             db_tmm.DoCommand("update 基本设置 set Cookie='" + QuanJu.Cookie + "' where id='配置1'");
             db_tmm.DoCommand("update 基本设置 set 贴吧名='" + textBox_sheZhi_tiebaName.Text + "' where id='配置1'");
             db_tmm.DoCommand("update 基本设置 set 扫描间隔='" + textBox_sheZhi_saoMiaoJianGe.Text + "' where id='配置1'");
             db_tmm.DoCommand("update 基本设置 set 删帖间隔='" + textBox_sheZhi_shanTieJianGe.Text + "' where id='配置1'");
-            db_tmm.DoCommand("update 基本设置 set 标题等级='" + textBox_guanJianCi_biaoTiDengJi.Text + "' where id='配置1'");
-            db_tmm.DoCommand("update 基本设置 set 内容等级='" + textBox_guanJianCi_neiRongDengJi.Text + "' where id='配置1'");
+            //db_tmm.DoCommand("update 基本设置 set 标题等级='" + textBox_guanJianCi_biaoTiDengJi.Text + "' where id='配置1'");
+            //db_tmm.DoCommand("update 基本设置 set 内容等级='" + textBox_guanJianCi_neiRongDengJi.Text + "' where id='配置1'");
             db_tmm.DoCommand("update 基本设置 set 主题等级墙='" + textBox_sheZhi_zhuTiDengJiQiang.Text + "' where id='配置1'");
             db_tmm.DoCommand("update 基本设置 set 回复等级墙='" + textBox_sheZhi_huiFuDengJiQiang.Text + "' where id='配置1'");
             db_tmm.DoCommand("update 基本设置 set 等级墙开始时间='" + dateTimePicker_sheZhi_kaiShiShiJian.Text + "' where id='配置1'");
             db_tmm.DoCommand("update 基本设置 set 等级墙结束时间='" + dateTimePicker_sheZhi_tingZhiShiJian.Text + "' where id='配置1'");
 
-            temp = checkBox_sheZhi_buSaoMiaoZhiDingTie.Checked ? "1" : "0";
+            string temp = checkBox_sheZhi_buSaoMiaoZhiDingTie.Checked ? "1" : "0";
             db_tmm.DoCommand("update 基本设置 set 跳过置顶='" + temp + "' where id='配置1'");
 
             temp = checkBox_sheZhi_buSaoMiaoJingPinTie.Checked ? "1" : "0";
@@ -239,58 +244,17 @@ namespace TiebaManagerMini
             temp = checkBox_wbgl_kaiQiWenBenGuoLv.Checked ? "1" : "0";
             db_tmm.DoCommand("update 基本设置 set 开启文本过滤='" + temp + "' where id='配置1'");
 
-            temp = checkBox_guanJianCi_biaoTiDengJi.Checked ? "1" : "0";
-            db_tmm.DoCommand("update 基本设置 set 启用标题等级='" + temp + "' where id='配置1'");
+            //temp = checkBox_guanJianCi_biaoTiDengJi.Checked ? "1" : "0";
+            //db_tmm.DoCommand("update 基本设置 set 启用标题等级='" + temp + "' where id='配置1'");
 
-            temp = checkBox_guanJianCi_neiRongDengJi.Checked ? "1" : "0";
-            db_tmm.DoCommand("update 基本设置 set 启用内容等级='" + temp + "' where id='配置1'");
+            //temp = checkBox_guanJianCi_neiRongDengJi.Checked ? "1" : "0";
+            //db_tmm.DoCommand("update 基本设置 set 启用内容等级='" + temp + "' where id='配置1'");
 
             temp = checkBox_sheZhi_zhuTiDengJiQiang.Checked ? "1" : "0";
             db_tmm.DoCommand("update 基本设置 set 启用主题等级墙='" + temp + "' where id='配置1'");
 
-            temp = checkBox__sheZhi_huiFuDengJiQiang.Checked ? "1" : "0";
+            temp = checkBox_sheZhi_huiFuDengJiQiang.Checked ? "1" : "0";
             db_tmm.DoCommand("update 基本设置 set 启用回复等级墙='" + temp + "' where id='配置1'");
-
-            string[] tempStr = new string[0];
-            db_tmm.DoCommand("delete from 标题关键词");
-            tempStr = textBox_guanJianCi_biaoTiGuanJianCi.Text.Split(Environment.NewLine.ToCharArray());
-            foreach (string str in tempStr)
-            {
-                if (!string.IsNullOrEmpty(str))
-                {
-                    db_tmm.DoCommand("insert into 标题关键词(关键词) values('" + str + "')");
-                }
-            }
-
-            db_tmm.DoCommand("delete from 内容关键词");
-            tempStr = textBox_guanJianCi_neiRongGuanJianCi.Text.Split(Environment.NewLine.ToCharArray());
-            foreach (string str in tempStr)
-            {
-                if (!string.IsNullOrEmpty(str))
-                {
-                    db_tmm.DoCommand("insert into 内容关键词(关键词) values('" + str + "')");
-                }
-            }
-
-            db_tmm.DoCommand("delete from 用户黑名单");
-            tempStr = textBox_mingDan_heiMingDan.Text.Split(Environment.NewLine.ToCharArray());
-            foreach (string str in tempStr)
-            {
-                if (!string.IsNullOrEmpty(str))
-                {
-                    db_tmm.DoCommand("insert into 用户黑名单(用户名) values('" + str + "')");
-                }
-            }
-
-            db_tmm.DoCommand("delete from 用户白名单");
-            tempStr = textBox_mingDan_baiMingDan.Text.Split(Environment.NewLine.ToCharArray());
-            foreach (string str in tempStr)
-            {
-                if (!string.IsNullOrEmpty(str))
-                {
-                    db_tmm.DoCommand("insert into 用户白名单(用户名) values('" + str + "')");
-                }
-            }
         }
 
         /// <summary>
@@ -325,14 +289,14 @@ namespace TiebaManagerMini
                 return;
             }
 
-            if (checkBox__sheZhi_huiFuDengJiQiang.Checked && string.IsNullOrEmpty(BST.JianYiZhengZe(textBox_sheZhi_huiFuDengJiQiang.Text, "^([0-9]{1,2})$")))
+            if (checkBox_sheZhi_huiFuDengJiQiang.Checked && string.IsNullOrEmpty(BST.JianYiZhengZe(textBox_sheZhi_huiFuDengJiQiang.Text, "^([0-9]{1,2})$")))
             {
                 MessageBox.Show(text: " 等级墙：回复等级格式不正确", caption: "笨蛋雪说：", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Exclamation);
                 return;
             }
 
             //等级墙生效时间
-            if (checkBox_sheZhi_zhuTiDengJiQiang.Checked || checkBox__sheZhi_huiFuDengJiQiang.Checked)
+            if (checkBox_sheZhi_zhuTiDengJiQiang.Checked || checkBox_sheZhi_huiFuDengJiQiang.Checked)
             {
                 if (string.IsNullOrEmpty(BST.JianYiZhengZe(dateTimePicker_sheZhi_kaiShiShiJian.Text, "^(([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-9]|[0-5][0-9]))$")))
                 {
@@ -348,17 +312,17 @@ namespace TiebaManagerMini
             }
 
             //启用等级限制
-            if (checkBox_guanJianCi_biaoTiDengJi.Checked && string.IsNullOrEmpty(BST.JianYiZhengZe(textBox_guanJianCi_biaoTiDengJi.Text, "^([0-9]{1,2})$")))
-            {
-                MessageBox.Show(text: " 等级墙：主题等级格式不正确", caption: "笨蛋雪说：", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Exclamation);
-                return;
-            }
+            //if (checkBox_guanJianCi_biaoTiDengJi.Checked && string.IsNullOrEmpty(BST.JianYiZhengZe(textBox_guanJianCi_biaoTiDengJi.Text, "^([0-9]{1,2})$")))
+            //{
+            //    MessageBox.Show(text: " 等级墙：主题等级格式不正确", caption: "笨蛋雪说：", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Exclamation);
+            //    return;
+            //}
 
-            if (checkBox_guanJianCi_neiRongDengJi.Checked && string.IsNullOrEmpty(BST.JianYiZhengZe(textBox_guanJianCi_neiRongDengJi.Text, "^([0-9]{1,2})$")))
-            {
-                MessageBox.Show(text: " 等级墙：回复等级格式不正确", caption: "笨蛋雪说：", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Exclamation);
-                return;
-            }
+            //if (checkBox_guanJianCi_neiRongDengJi.Checked && string.IsNullOrEmpty(BST.JianYiZhengZe(textBox_guanJianCi_neiRongDengJi.Text, "^([0-9]{1,2})$")))
+            //{
+            //    MessageBox.Show(text: " 等级墙：回复等级格式不正确", caption: "笨蛋雪说：", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Exclamation);
+            //    return;
+            //}
 
             button_sheZhi_kaiShi.Enabled = false;
             FormEnabled(false);//批量禁用控件
@@ -382,14 +346,14 @@ namespace TiebaManagerMini
             DaiShanDuiLie.Clear();
 
             //删帖线程
-            Thread shantiethr = new Thread(new ThreadStart(Shantie))
+            Thread shantiethr = new Thread(new ThreadStart(ShanTie))
             {
                 IsBackground = true
             };
             shantiethr.Start();
 
             //操作量查询线程
-            Thread caozuoliangthr = new Thread(new ThreadStart(CaozuoliangChaxun))
+            Thread caozuoliangthr = new Thread(new ThreadStart(CaoZuoLiangChaXun))
             {
                 IsBackground = true
             };
@@ -419,12 +383,12 @@ namespace TiebaManagerMini
             textBox_mingDan_baiMingDan.Enabled = b;
             textBox_sheZhi_tiebaName.Enabled = b;
             textBox_sheZhi_saoMiaoJianGe.Enabled = b;
-            textBox_guanJianCi_biaoTiGuanJianCi.Enabled = b;
-            textBox_guanJianCi_neiRongGuanJianCi.Enabled = b;
-            textBox_mingDan_heiMingDan.Enabled = b;
+            listView_guanJianCi_biaoTiGuanJianCi.Enabled = b;
+            listView_guanJianCi_neiRongGuanJianCi.Enabled = b;
+            listView_mingDan_heiMingDan.Enabled = b;
             textBox_sheZhi_shanTieJianGe.Enabled = b;
-            textBox_guanJianCi_biaoTiDengJi.Enabled = b;
-            textBox_guanJianCi_neiRongDengJi.Enabled = b;
+            //textBox_guanJianCi_biaoTiDengJi.Enabled = b;
+            //textBox_guanJianCi_neiRongDengJi.Enabled = b;
             textBox_sheZhi_zhuTiDengJiQiang.Enabled = b;
             textBox_sheZhi_huiFuDengJiQiang.Enabled = b;
             dateTimePicker_sheZhi_kaiShiShiJian.Enabled = b;
@@ -434,10 +398,10 @@ namespace TiebaManagerMini
             checkBox_sheZhi_buSaoMiaoJingPinTie.Enabled = b;
             checkBox_sheZhi_buSaoMiaoLzl.Enabled = b;
             checkBox_wbgl_kaiQiWenBenGuoLv.Enabled = b;
-            checkBox_guanJianCi_biaoTiDengJi.Enabled = b;
-            checkBox_guanJianCi_neiRongDengJi.Enabled = b;
+            //checkBox_guanJianCi_biaoTiDengJi.Enabled = b;
+            //checkBox_guanJianCi_neiRongDengJi.Enabled = b;
             checkBox_sheZhi_zhuTiDengJiQiang.Enabled = b;
-            checkBox__sheZhi_huiFuDengJiQiang.Enabled = b;
+            checkBox_sheZhi_huiFuDengJiQiang.Enabled = b;
 
             listView_wbgl_wenBenGuoLvLieBiao.Enabled = b;
         }
@@ -459,22 +423,75 @@ namespace TiebaManagerMini
             //等级墙
             QuanJu.QiYongZhuTiDengJiQiang = checkBox_sheZhi_zhuTiDengJiQiang.Checked;
             QuanJu.ZhuTiDengJiQiang = Convert.ToInt32(textBox_sheZhi_zhuTiDengJiQiang.Text);
-            QuanJu.QiYongHuiFuDengJiQiang = checkBox__sheZhi_huiFuDengJiQiang.Checked;
+            QuanJu.QiYongHuiFuDengJiQiang = checkBox_sheZhi_huiFuDengJiQiang.Checked;
             QuanJu.HuiFuDengJiQiang = Convert.ToInt32(textBox_sheZhi_huiFuDengJiQiang.Text);
             QuanJu.DengJiQiangKaiShiShiJian = dateTimePicker_sheZhi_kaiShiShiJian.Text;
             QuanJu.DengJiQiangJieShuShiJian = dateTimePicker_sheZhi_tingZhiShiJian.Text;
 
             //等级限制
-            QuanJu.QiYongBiaoTiDengJi = checkBox_guanJianCi_biaoTiDengJi.Checked;
-            QuanJu.BiaoTiDengJi = Convert.ToInt32(textBox_guanJianCi_biaoTiDengJi.Text);
-            QuanJu.QiYongBiaoTiDengJi = checkBox_guanJianCi_neiRongDengJi.Checked;
-            QuanJu.NeiRongDengJi = Convert.ToInt32(textBox_guanJianCi_neiRongDengJi.Text);
+            //QuanJu.QiYongBiaoTiDengJi = checkBox_guanJianCi_biaoTiDengJi.Checked;
+            //QuanJu.BiaoTiDengJi = Convert.ToInt32(textBox_guanJianCi_biaoTiDengJi.Text);
+            //QuanJu.QiYongBiaoTiDengJi = checkBox_guanJianCi_neiRongDengJi.Checked;
+            //QuanJu.NeiRongDengJi = Convert.ToInt32(textBox_guanJianCi_neiRongDengJi.Text);
 
             //关键词
-            GuanJianCi.BiaoTi = textBox_guanJianCi_biaoTiGuanJianCi.Text.Split(Environment.NewLine.ToCharArray());
-            GuanJianCi.NeiRong = textBox_guanJianCi_neiRongGuanJianCi.Text.Split(Environment.NewLine.ToCharArray());
-            GuanJianCi.HeiMingDan = textBox_mingDan_heiMingDan.Text.Split(Environment.NewLine.ToCharArray());
-            GuanJianCi.BaiMingDan = textBox_mingDan_baiMingDan.Text.Split(Environment.NewLine.ToCharArray());
+            GuanJianCi.BiaoTi = new List<GuanJianCi.GuanJianCiJieGou>();
+            DataTable dt = db_tmm.GetDataTable("select 关键词,是否正则 from 标题关键词");
+            foreach (DataRow dr in dt.Rows)
+            {
+                if (!string.IsNullOrEmpty(Convert.ToString(dr["关键词"])))
+                {
+                    GuanJianCi.GuanJianCiJieGou guanJianCiJieGou = new GuanJianCi.GuanJianCiJieGou();
+                    guanJianCiJieGou.GuanJianCi = Convert.ToString(dr["关键词"]);
+                    guanJianCiJieGou.IsRegex = Convert.ToString(dr["是否正则"]) == "是" ? true : false;
+
+                    GuanJianCi.BiaoTi.Add(guanJianCiJieGou);
+                }
+            }
+
+            GuanJianCi.NeiRong = new List<GuanJianCi.GuanJianCiJieGou>();
+            dt = db_tmm.GetDataTable("select 关键词 from 内容关键词");
+            foreach (DataRow dr in dt.Rows)
+            {
+                if (!string.IsNullOrEmpty(Convert.ToString(dr["关键词"])))
+                {
+                    GuanJianCi.GuanJianCiJieGou guanJianCiJieGou = new GuanJianCi.GuanJianCiJieGou();
+                    guanJianCiJieGou.GuanJianCi = Convert.ToString(dr["关键词"]);
+                    guanJianCiJieGou.IsRegex = Convert.ToString(dr["是否正则"]) == "是" ? true : false;
+                    Lib.GetYunSuanFu(Convert.ToString(dr["触发次数"]), out guanJianCiJieGou.DengJiYunSuanFu, out guanJianCiJieGou.DengJi);
+                    Lib.GetYunSuanFu(Convert.ToString(dr["最后触发时间"]), out guanJianCiJieGou.LouCengYunSuanFu, out guanJianCiJieGou.LouCeng);
+
+                    GuanJianCi.NeiRong.Add(guanJianCiJieGou);
+                }
+            }
+
+            GuanJianCi.HeiMingDan = new List<GuanJianCi.GuanJianCiJieGou>();
+            dt = db_tmm.GetDataTable("select 用户名 from 用户黑名单");
+            foreach (DataRow dr in dt.Rows)
+            {
+                if (!string.IsNullOrEmpty(Convert.ToString(dr["用户名"])))
+                {
+                    GuanJianCi.GuanJianCiJieGou guanJianCiJieGou = new GuanJianCi.GuanJianCiJieGou();
+                    guanJianCiJieGou.GuanJianCi = Convert.ToString(dr["用户名"]);
+                    guanJianCiJieGou.IsRegex = Convert.ToString(dr["是否正则"]) == "是" ? true : false;
+
+                    GuanJianCi.HeiMingDan.Add(guanJianCiJieGou);
+                }
+            }
+
+            GuanJianCi.BaiMingDan = new List<GuanJianCi.GuanJianCiJieGou>();
+            dt = db_tmm.GetDataTable("select 用户名 from 用户白名单");
+            foreach (DataRow dr in dt.Rows)
+            {
+                if (!string.IsNullOrEmpty(Convert.ToString(dr["用户名"])))
+                {
+                    GuanJianCi.GuanJianCiJieGou guanJianCiJieGou = new GuanJianCi.GuanJianCiJieGou();
+                    guanJianCiJieGou.GuanJianCi = Convert.ToString(dr["用户名"]);
+
+                    GuanJianCi.BaiMingDan.Add(guanJianCiJieGou);
+                }
+            }
+            dt.Dispose();
 
             //文本过滤
             if (checkBox_wbgl_kaiQiWenBenGuoLv.Checked)
@@ -496,7 +513,7 @@ namespace TiebaManagerMini
         {
             if (isLoad)
             {
-                QuanJu.YongHuMing = TLib.GetBaiduYongHuMing(QuanJu.Cookie);
+                QuanJu.YongHuMing = Tieba.GetBaiduYongHuMing(QuanJu.Cookie);
             }
 
             if (string.IsNullOrEmpty(QuanJu.Cookie) || string.IsNullOrEmpty(QuanJu.YongHuMing))
@@ -524,7 +541,7 @@ namespace TiebaManagerMini
         public bool TiebaCanshu()
         {
             string tiebaname = QuanJu.TiebaName;
-            string fid = TLib.GetTiebaFid(tiebaname);
+            string fid = Tieba.GetTiebaFid(tiebaname);
             if (string.IsNullOrEmpty(fid))
             {
                 Say("贴吧参数获取失败：fid无效");
@@ -579,7 +596,7 @@ namespace TiebaManagerMini
                     Pn = 1
                 };
 
-                List<ZhuTiJieGou> zhuTiLieBiao = tieba.GetZhuTiLieBiao(wenBenGuoLvLieBiao);
+                List<ZhuTiJieGou> zhuTiLieBiao = tieba.GetZhuTiLieBiao(out int zhuTiZongYeShu, wenBenGuoLvLieBiao);
                 Debug.WriteLine(tieba.Cookie);
                 if (!QuanJu.ZhiShuChuShanTieRiZhi)
                 {
@@ -591,7 +608,7 @@ namespace TiebaManagerMini
                 if ((hcsjc2 - hcsjc1) >= 300)//距离上次清理大于300秒
                 {
                     int timeStamp = Convert.ToInt32(BST.QuShiJianChuo());
-                    timeStamp = timeStamp - 3600;//3600秒=60分钟
+                    timeStamp -= 3600;//3600秒=60分钟
                     HuanCun.ZhuTiHuanCunLieBiao.RemoveWhen((tiezi) => tiezi.GengXinShiJian < timeStamp);
                     HuanCun.LzlHuanCunLieBiao.RemoveWhen((tiezi) => tiezi.GengXinShiJian < timeStamp);
                     HuanCun.DengJiHuanCunLieBiao.RemoveWhen((tiezi) => tiezi.GengXinShiJian < timeStamp);
@@ -599,7 +616,7 @@ namespace TiebaManagerMini
                 }
 
                 //等级墙运行时段判断
-                bool DengJiqiangYunxing = Lib.DengJiQiangShiJianPanDuan(QuanJu.DengJiQiangKaiShiShiJian, QuanJu.DengJiQiangJieShuShiJian);
+                bool dengJiQiangYunXing = Lib.DengJiQiangShiJianPanDuan(QuanJu.DengJiQiangKaiShiShiJian, QuanJu.DengJiQiangJieShuShiJian);
 
                 //主题贴循环
                 foreach (ZhuTiJieGou zhuti in zhuTiLieBiao)
@@ -610,31 +627,31 @@ namespace TiebaManagerMini
                     }
 
                     //缓存流程判断
-                    long zuihouhfsj = 0;
+                    long zuiHouHuiFuShiJian = 0;
                     for (int i = 0; i < HuanCun.ZhuTiHuanCunLieBiao.Count; i++)
                     {
                         if (HuanCun.ZhuTiHuanCunLieBiao[i].Tid == zhuti.Tid)
                         {
-                            zuihouhfsj = HuanCun.ZhuTiHuanCunLieBiao[i].ZuiHouHuiFuShiJian;
+                            zuiHouHuiFuShiJian = HuanCun.ZhuTiHuanCunLieBiao[i].ZuiHouHuiFuShiJian;
                             break;
                         }
                     }
 
-                    if (zuihouhfsj == 0)
+                    if (zuiHouHuiFuShiJian == 0)
                     {
                         //不存在
                         HuanCun.ZhuTiHuanCunLieBiao.Add(new HuanCun.ZhuTiHuanCunJieGou
                         {
                             Tid = zhuti.Tid,
-                            FaTieShiJian = zhuti.FaTieShiJian,
-                            ZuiHouHuiFuShiJian = zhuti.ZuiHouHuiFuShiJian,
+                            FaTieShiJian = zhuti.FaTieShiJianChuo,
+                            ZuiHouHuiFuShiJian = zhuti.ZuiHouHuiFuShiJianChuo,
                             GengXinShiJian = Convert.ToInt64(BST.QuShiJianChuo())
                         });
                     }
                     else
                     {
                         //存在
-                        if (zuihouhfsj == zhuti.ZuiHouHuiFuShiJian)
+                        if (zuiHouHuiFuShiJian == zhuti.ZuiHouHuiFuShiJianChuo)
                         {
                             //跳过
                             continue;
@@ -646,7 +663,7 @@ namespace TiebaManagerMini
                             {
                                 if (HuanCun.ZhuTiHuanCunLieBiao[i].Tid == zhuti.Tid)
                                 {
-                                    HuanCun.ZhuTiHuanCunLieBiao[i].ZuiHouHuiFuShiJian = zhuti.ZuiHouHuiFuShiJian;
+                                    HuanCun.ZhuTiHuanCunLieBiao[i].ZuiHouHuiFuShiJian = zhuti.ZuiHouHuiFuShiJianChuo;
                                     break;
                                 }
                             }
@@ -674,17 +691,17 @@ namespace TiebaManagerMini
                         }
                     }
 
-                    toolStripStatusLabel1.Text = zhuti.Tid.ToString() + " " + zhuti.BiaoTi + " " + zhuti.UidCanShu.YongHuMing;
+                    toolStripStatusLabel1.Text = zhuti.Tid.ToString() + " " + zhuti.BiaoTi + " " + zhuti.YongHuMing;
 
                     //用户白名单
-                    foreach (string bmd in GuanJianCi.BaiMingDan)
+                    foreach (var baiMingDan in GuanJianCi.BaiMingDan)
                     {
-                        if (string.IsNullOrEmpty(bmd))
+                        if (string.IsNullOrEmpty(baiMingDan.GuanJianCi))
                         {
                             continue;
                         }
 
-                        if (zhuti.UidCanShu.YongHuMing == bmd)
+                        if (zhuti.YongHuMing == baiMingDan.GuanJianCi)
                         {
                             goto tiaoguobt;//跳过标题审查
                         }
@@ -697,84 +714,44 @@ namespace TiebaManagerMini
                         BiaoTi = zhuti.BiaoTi,
                         Tid = zhuti.Tid,
                         LouCeng = 1,
-                        YongHuMing = zhuti.UidCanShu.YongHuMing,
-                        FaTieShiJian = zhuti.FaTieShiJian
+                        YongHuMing = zhuti.YongHuMing,
+                        FaTieShiJian = zhuti.FaTieShiJianChuo
                     };
 
-                    //主题等级墙
-                    if (DengJiqiangYunxing && QuanJu.QiYongZhuTiDengJiQiang)
-                    {
-                        int zhutiDengJi = HuanCun.GetDengJiHuanCun(zhuti.UidCanShu.YongHuMing, QuanJu.TiebaName);
-                        Debug.Write(zhuti.Tid.ToString() + " " + zhuti.UidCanShu.YongHuMing + " " + zhutiDengJi.ToString() + "<" + QuanJu.ZhuTiDengJiQiang.ToString() + " " + BST.ShiJianChuoDaoWenben(zhuti.FaTieShiJian * 1000));
-                        if (zhutiDengJi < QuanJu.ZhuTiDengJiQiang)
-                        {
-                            if (Lib.FaYanShiJianPanDuan(zhuti.FaTieShiJian, QuanJu.DengJiQiangKaiShiShiJian, QuanJu.DengJiQiangJieShuShiJian))
-                            {
-                                zhuTiDaiShan.YuanYin = "主题等级墙:" + zhuti.UidCanShu.YongHuMing + "(" + zhutiDengJi + ")";
-                                if (!DaiShanDuiLie.ListIsRepeat(tiezi => tiezi.Tid == zhuTiDaiShan.Tid))
-                                {
-                                    DaiShanDuiLie.Add(zhuTiDaiShan);
-                                }
-                                Debug.WriteLine(" 删除");
-                                goto tiaoguozt;//跳过这个主题帖 
-                            }
-                            else
-                            {
-                                Debug.WriteLine(" 不在时间范围");
-                            }
-                        }
-                        else
-                        {
-                            Debug.WriteLine(" 等级不符");
-                        }
-                    }
-
                     //用户名关键词
-                    foreach (string yonghuGjc in GuanJianCi.HeiMingDan)
+                    foreach (var heiMingDan in GuanJianCi.HeiMingDan)
                     {
-                        if (string.IsNullOrEmpty(yonghuGjc))
+                        if (string.IsNullOrEmpty(heiMingDan.GuanJianCi))
                         {
                             continue;
                         }
 
-                        if (zhuti.UidCanShu.YongHuMing.Contains(yonghuGjc))
+                        if (zhuti.YongHuMing.Contains(heiMingDan.GuanJianCi))
                         {
-                            zhuTiDaiShan.YuanYin = "用户名关键词:" + zhuti.UidCanShu.YongHuMing;
+                            zhuTiDaiShan.YuanYin = "用户名关键词:" + zhuti.YongHuMing;
                             if (!DaiShanDuiLie.ListIsRepeat(tiezi => tiezi.Tid == zhuTiDaiShan.Tid))
                             {
                                 DaiShanDuiLie.Add(zhuTiDaiShan);
                             }
-                            goto tiaoguozt;//跳过这个主题帖
+                            goto tiaoGuoZhuTi;//跳过这个主题帖
                         }
                     }
 
                     //判断帖子标题
-                    foreach (string biaotiGjc in GuanJianCi.BiaoTi)
+                    foreach (var biaoTiGuanJianCi in GuanJianCi.BiaoTi)
                     {
-                        if (string.IsNullOrEmpty(biaotiGjc))
+                        if (string.IsNullOrEmpty(biaoTiGuanJianCi.GuanJianCi))
                         {
                             continue;
                         }
 
-                        if (zhuti.BiaoTi.Contains(biaotiGjc))
+                        if (zhuti.BiaoTi.Contains(biaoTiGuanJianCi.GuanJianCi))
                         {
-                            zhuTiDaiShan.YuanYin = "关键词:" + biaotiGjc;
+                            zhuTiDaiShan.YuanYin = "关键词:" + biaoTiGuanJianCi.GuanJianCi;
                             if (!DaiShanDuiLie.ListIsRepeat(tiezi => tiezi.Tid == zhuTiDaiShan.Tid))
                             {
-                                if (QuanJu.QiYongBiaoTiDengJi)
-                                {
-                                    zhuti.UidCanShu.DengJi = HuanCun.GetDengJiHuanCun(zhuti.UidCanShu.YongHuMing, QuanJu.TiebaName);
-                                    if (zhuti.UidCanShu.DengJi < QuanJu.BiaoTiDengJi)
-                                    {
-                                        DaiShanDuiLie.Add(zhuTiDaiShan);
-                                        goto tiaoguozt;//跳过这个主题帖
-                                    }
-                                }
-                                else
-                                {
-                                    DaiShanDuiLie.Add(zhuTiDaiShan);
-                                    goto tiaoguozt;//跳过这个主题帖
-                                }
+                                DaiShanDuiLie.Add(zhuTiDaiShan);
+                                goto tiaoGuoZhuTi;//跳过这个主题帖
                             }
                         }
                     }
@@ -786,11 +763,11 @@ namespace TiebaManagerMini
                     List<NeiRongJieGou> neiRongLieBiao_daoXu = null;
 
                     tieba.Tid = zhuti.Tid;
-                    neiRongLieBiao = tieba.GetTieZiNeiRong(wbgldt: wenBenGuoLvLieBiao);
+                    neiRongLieBiao = tieba.GetTieZiNeiRong(out int neiRongZongYeShu, wbgldt: wenBenGuoLvLieBiao);
 
                     if (neiRongLieBiao.Count >= 30)//如果获取到的内容等于30个，要翻页
                     {
-                        neiRongLieBiao_daoXu = tieba.GetTieZiNeiRong(isDaoxu: true, wbgldt: wenBenGuoLvLieBiao);
+                        neiRongLieBiao_daoXu = tieba.GetTieZiNeiRong(out neiRongZongYeShu, isDaoxu: true, wbgldt: wenBenGuoLvLieBiao);
 
                         //合并+去重
                         neiRongLieBiao = neiRongLieBiao.Union(neiRongLieBiao_daoXu).ToList();
@@ -802,7 +779,7 @@ namespace TiebaManagerMini
                     //判断是否被删除或获取失败
                     if (neiRongLieBiao.Count == 0)
                     {
-                        goto tiaoguozt;//跳过这个主题帖
+                        goto tiaoGuoZhuTi;//跳过这个主题帖
                     }
 
                     //降序 
@@ -811,7 +788,7 @@ namespace TiebaManagerMini
                     neiRongLieBiao = neiRongLieBiao.OrderBy(tiezi => tiezi.LouCeng).ToList();
 
                     //判断内容
-                    foreach (NeiRongJieGou neirong in neiRongLieBiao)
+                    foreach (NeiRongJieGou neiRong in neiRongLieBiao)
                     {
                         if (QuanJu.Stop)
                         {
@@ -819,16 +796,16 @@ namespace TiebaManagerMini
                         }
 
                         //用户白名单
-                        foreach (string bmd in GuanJianCi.BaiMingDan)
+                        foreach (var baiMingDan in GuanJianCi.BaiMingDan)
                         {
-                            if (string.IsNullOrEmpty(bmd))
+                            if (string.IsNullOrEmpty(baiMingDan.GuanJianCi))
                             {
                                 continue;
                             }
 
-                            if (neirong.UidCanShu.YongHuMing == bmd)
+                            if (neiRong.YongHuMing == baiMingDan.GuanJianCi)
                             {
-                                //goto tiaoguonr;//去下一个内容
+                                //goto tiaoGuoNeiRong;//去下一个内容
                                 goto tiaolzl;//去楼中楼
                             }
                         }
@@ -836,134 +813,150 @@ namespace TiebaManagerMini
                         //内容待删
                         DaiShanDuiLieJieGou NeiRongDaishan = new DaiShanDuiLieJieGou
                         {
-                            BiaoTi = neirong.BiaoTi,
-                            Tid = neirong.Tid,
-                            YongHuMing = neirong.UidCanShu.YongHuMing,
-                            FaTieShiJian = neirong.FaTieShiJian,
-                            Pid = neirong.Pid,
-                            LouCeng = neirong.LouCeng
+                            BiaoTi = neiRong.BiaoTi,
+                            Tid = neiRong.Tid,
+                            YongHuMing = neiRong.YongHuMing,
+                            FaTieShiJian = neiRong.FaTieShiJianChuo,
+                            Pid = neiRong.Pid,
+                            LouCeng = neiRong.LouCeng
                         };
 
-                        //回复等级墙
-                        if (DengJiqiangYunxing && QuanJu.QiYongHuiFuDengJiQiang)
+                        //等级墙是否可以运行
+                        if (dengJiQiangYunXing)
                         {
-                            if (neirong.UidCanShu.DengJi < QuanJu.HuiFuDengJiQiang)
+                            //判断楼层
+                            if (neiRong.LouCeng == 1)
                             {
-                                if (Lib.FaYanShiJianPanDuan(neirong.FaTieShiJian, QuanJu.DengJiQiangKaiShiShiJian, QuanJu.DengJiQiangJieShuShiJian))
+                                //主题等级墙
+                                if (QuanJu.QiYongZhuTiDengJiQiang)
                                 {
-                                    NeiRongDaishan.YuanYin = "回复等级墙:" + neirong.UidCanShu.YongHuMing + "(" + neirong.UidCanShu.DengJi + ")";
-                                    if (neirong.LouCeng == 1)
+                                    if (neiRong.DengJi < QuanJu.ZhuTiDengJiQiang)
                                     {
-                                        NeiRongDaishan.LeiXing = ShanTieLeiXing.ShanZhuTi;
-                                        if (!DaiShanDuiLie.ListIsRepeat(tiezi => neirong.Tid == NeiRongDaishan.Tid))
+                                        if (Lib.FaYanShiJianPanDuan(neiRong.FaTieShiJianChuo, QuanJu.DengJiQiangKaiShiShiJian, QuanJu.DengJiQiangJieShuShiJian))
                                         {
-                                            DaiShanDuiLie.Add(NeiRongDaishan);
+                                            NeiRongDaishan.LeiXing = ShanTieLeiXing.ShanZhuTi;
+                                            if (!DaiShanDuiLie.ListIsRepeat(tiezi => neiRong.Tid == NeiRongDaishan.Tid))
+                                            {
+                                                DaiShanDuiLie.Add(NeiRongDaishan);
+                                            }
+                                            goto tiaoGuoZhuTi;//跳过这个主题帖
                                         }
-                                        goto tiaoguozt;//跳过这个主题帖
                                     }
-                                    else
+                                }
+                            }
+                            else
+                            {
+                                //回复等级墙
+                                if (QuanJu.QiYongHuiFuDengJiQiang)
+                                {
+                                    if (neiRong.DengJi < QuanJu.HuiFuDengJiQiang)
                                     {
-                                        NeiRongDaishan.LeiXing = ShanTieLeiXing.ShanHuiFu;
-                                        if (!DaiShanDuiLie.ListIsRepeat(tiezi => neirong.Pid == NeiRongDaishan.Pid))
+                                        if (Lib.FaYanShiJianPanDuan(neiRong.FaTieShiJianChuo, QuanJu.DengJiQiangKaiShiShiJian, QuanJu.DengJiQiangJieShuShiJian))
                                         {
-                                            DaiShanDuiLie.Add(NeiRongDaishan);
+                                            NeiRongDaishan.YuanYin = "回复等级墙:" + neiRong.YongHuMing + "(" + neiRong.DengJi + ")";
+
+                                            NeiRongDaishan.LeiXing = ShanTieLeiXing.ShanHuiFu;
+                                            if (!DaiShanDuiLie.ListIsRepeat(tiezi => neiRong.Pid == NeiRongDaishan.Pid))
+                                            {
+                                                DaiShanDuiLie.Add(NeiRongDaishan);
+                                            }
+                                            goto tiaoGuoNeiRong;//去下一个内容
                                         }
-                                        goto tiaoguonr;//去下一个内容
                                     }
                                 }
                             }
                         }
 
                         //用户名关键词
-                        foreach (string yonghuGjc in GuanJianCi.HeiMingDan)
+                        foreach (var heiMingDan in GuanJianCi.HeiMingDan)
                         {
-                            if (string.IsNullOrEmpty(yonghuGjc))
+                            if (string.IsNullOrEmpty(heiMingDan.GuanJianCi))
                             {
                                 continue;
                             }
 
-                            if (neirong.UidCanShu.YongHuMing.Contains(yonghuGjc))
+                            if (neiRong.YongHuMing.Contains(heiMingDan.GuanJianCi))
                             {
-                                NeiRongDaishan.YuanYin = "用户名关键词:" + neirong.UidCanShu.YongHuMing;
-                                if (neirong.LouCeng == 1)
+                                NeiRongDaishan.YuanYin = "用户名关键词:" + neiRong.YongHuMing;
+                                if (neiRong.LouCeng == 1)
                                 {
                                     NeiRongDaishan.LeiXing = ShanTieLeiXing.ShanZhuTi;
-                                    if (!DaiShanDuiLie.ListIsRepeat(tiezi => neirong.Tid == NeiRongDaishan.Tid))
+                                    if (!DaiShanDuiLie.ListIsRepeat(tiezi => neiRong.Tid == NeiRongDaishan.Tid))
                                     {
                                         DaiShanDuiLie.Add(NeiRongDaishan);
                                     }
-                                    goto tiaoguozt;//跳过这个主题帖
+                                    goto tiaoGuoZhuTi;//跳过这个主题帖
                                 }
                                 else
                                 {
                                     NeiRongDaishan.LeiXing = ShanTieLeiXing.ShanHuiFu;
-                                    if (!DaiShanDuiLie.ListIsRepeat(tiezi => neirong.Pid == NeiRongDaishan.Pid))
+                                    if (!DaiShanDuiLie.ListIsRepeat(tiezi => neiRong.Pid == NeiRongDaishan.Pid))
                                     {
                                         DaiShanDuiLie.Add(NeiRongDaishan);
                                     }
-                                    goto tiaoguonr;//去下一个内容
+                                    goto tiaoGuoNeiRong;//去下一个内容
                                 }
                             }
                         }
 
                         //判断帖子内容
-                        foreach (string neirongGjc in GuanJianCi.NeiRong)
+                        foreach (var neiRongGuanJianCi in GuanJianCi.NeiRong)
                         {
-                            string guanHianCi = neirongGjc;
-                            if (string.IsNullOrEmpty(guanHianCi))
+                            string guanJianCi = neiRongGuanJianCi.GuanJianCi;
+                            if (string.IsNullOrEmpty(guanJianCi))
                             {
                                 continue;
                             }
 
                             //变量替换，临时功能
-                            if (guanHianCi.Contains("{BiaoTi}"))//暂时先这么写
+                            if (guanJianCi.Contains("{BiaoTi}"))//暂时先这么写
                             {
-                                if (neirong.LouCeng > 1)//不包含1楼的回复，不支持楼中楼
+                                if (neiRong.LouCeng > 1)//不包含1楼的回复，不支持楼中楼
                                 {
-                                    guanHianCi = guanHianCi.Replace("{BiaoTi}", neirong.BiaoTi);
+                                    guanJianCi = guanJianCi.Replace("{BiaoTi}", neiRong.BiaoTi);
                                 }
                             }
 
-                            if (neirong.NeiRong.Contains(guanHianCi))
+                            if (neiRong.NeiRong.Contains(guanJianCi))
                             {
-                                NeiRongDaishan.YuanYin = "关键词:" + guanHianCi;
-                                if (neirong.LouCeng == 1)
+                                NeiRongDaishan.YuanYin = "关键词:" + guanJianCi;
+                                if (neiRong.LouCeng == 1)
                                 {
                                     NeiRongDaishan.LeiXing = ShanTieLeiXing.ShanZhuTi;
-                                    if (!DaiShanDuiLie.ListIsRepeat(tiezi => neirong.Tid == NeiRongDaishan.Tid))
+                                    if (!DaiShanDuiLie.ListIsRepeat(tiezi => neiRong.Tid == NeiRongDaishan.Tid))
                                     {
                                         if (QuanJu.QiYongNeiRongDengJi)
                                         {
-                                            if (neirong.UidCanShu.DengJi < QuanJu.NeiRongDengJi)
+                                            if (neiRong.DengJi < QuanJu.NeiRongDengJi)
                                             {
                                                 DaiShanDuiLie.Add(NeiRongDaishan);
-                                                goto tiaoguozt;//跳过这个主题帖
+                                                goto tiaoGuoZhuTi;//跳过这个主题帖
                                             }
                                         }
                                         else
                                         {
                                             DaiShanDuiLie.Add(NeiRongDaishan);
-                                            goto tiaoguozt;//跳过这个主题帖
+                                            goto tiaoGuoZhuTi;//跳过这个主题帖
                                         }
                                     }
                                 }
                                 else
                                 {
                                     NeiRongDaishan.LeiXing = ShanTieLeiXing.ShanHuiFu;
-                                    if (!DaiShanDuiLie.ListIsRepeat(tiezi => neirong.Pid == NeiRongDaishan.Pid))
+                                    if (!DaiShanDuiLie.ListIsRepeat(tiezi => neiRong.Pid == NeiRongDaishan.Pid))
                                     {
                                         if (QuanJu.QiYongNeiRongDengJi)
                                         {
-                                            if (neirong.UidCanShu.DengJi < QuanJu.NeiRongDengJi)
+                                            if (neiRong.DengJi < QuanJu.NeiRongDengJi)
                                             {
                                                 DaiShanDuiLie.Add(NeiRongDaishan);
-                                                goto tiaoguonr;//去下一个回复
+                                                goto tiaoGuoNeiRong;//去下一个回复
                                             }
                                         }
                                         else
                                         {
                                             DaiShanDuiLie.Add(NeiRongDaishan);
-                                            goto tiaoguonr;//去下一个回复
+                                            goto tiaoGuoNeiRong;//去下一个回复
                                         }
                                     }
                                 }
@@ -974,17 +967,17 @@ namespace TiebaManagerMini
                     tiaolzl:;
                         if (QuanJu.TiaoGuoLzl)
                         {
-                            goto tiaoguonr;
+                            goto tiaoGuoNeiRong;
                         }
 
                         //先判断当前获取到的回复数
-                        int dangqianLzlHuifushu = neirong.LzlHuiFuShu;
+                        int dangqianLzlHuifushu = neiRong.LzlHuiFuShu;
                         if (dangqianLzlHuifushu > 0)
                         {
                             int HuanCunLzlHuifushu = 0;
                             for (int i = 0; i < HuanCun.LzlHuanCunLieBiao.Count; i++)
                             {
-                                if (HuanCun.LzlHuanCunLieBiao[i].Pid == neirong.Pid)
+                                if (HuanCun.LzlHuanCunLieBiao[i].Pid == neiRong.Pid)
                                 {
                                     HuanCunLzlHuifushu = HuanCun.LzlHuanCunLieBiao[i].HuiFuShu;
                                     break;
@@ -996,7 +989,7 @@ namespace TiebaManagerMini
                                 //第一次写入
                                 HuanCun.LzlHuanCunLieBiao.Add(new HuanCun.LzlHuanCunJieGou
                                 {
-                                    Pid = neirong.Pid,
+                                    Pid = neiRong.Pid,
                                     HuiFuShu = dangqianLzlHuifushu,
                                     GengXinShiJian = 0
                                 });
@@ -1004,24 +997,24 @@ namespace TiebaManagerMini
                             else if (dangqianLzlHuifushu == HuanCunLzlHuifushu)
                             {
                                 //如果当前与缓存相等
-                                goto tiaoguonr;
+                                goto tiaoGuoNeiRong;
                             }
 
-                            tieba.Pid = neirong.Pid;
-                            List<NeiRongJieGou> lzlNeiRongLb = tieba.GetLzlNeiRong(wbgldt: wenBenGuoLvLieBiao);
+                            tieba.Pid = neiRong.Pid;
+                            List<NeiRongJieGou> lzlNeiRongLb = tieba.GetLzlNeiRong(out int lzlZongYeShu, wbgldt: wenBenGuoLvLieBiao);
                             foreach (NeiRongJieGou lzlNeiRong in lzlNeiRongLb)
                             {
                                 //用户白名单
-                                foreach (string bmd in GuanJianCi.BaiMingDan)
+                                foreach (var baiMingDan in GuanJianCi.BaiMingDan)
                                 {
-                                    if (string.IsNullOrEmpty(bmd))
+                                    if (string.IsNullOrEmpty(baiMingDan.GuanJianCi))
                                     {
                                         continue;
                                     }
 
-                                    if (lzlNeiRong.UidCanShu.YongHuMing == bmd)
+                                    if (lzlNeiRong.YongHuMing == baiMingDan.GuanJianCi)
                                     {
-                                        goto lzltiaoguonr;//去下一个楼中楼
+                                        goto lzlTiaoGuoNeiRong;//去下一个楼中楼
                                     }
                                 }
 
@@ -1030,87 +1023,87 @@ namespace TiebaManagerMini
                                 {
                                     BiaoTi = lzlNeiRong.BiaoTi,
                                     Tid = lzlNeiRong.Tid,
-                                    YongHuMing = lzlNeiRong.UidCanShu.YongHuMing,
-                                    FaTieShiJian = lzlNeiRong.FaTieShiJian,
+                                    YongHuMing = lzlNeiRong.YongHuMing,
+                                    FaTieShiJian = lzlNeiRong.FaTieShiJianChuo,
                                     LeiXing = ShanTieLeiXing.ShanLzl,
                                     Pid = lzlNeiRong.Pid,
                                     Spid = lzlNeiRong.Spid,
-                                    LouCeng = neirong.LouCeng //楼中楼没有楼层
+                                    LouCeng = neiRong.LouCeng //楼中楼没有楼层
                                 };
 
                                 //楼中楼等级墙
-                                if (DengJiqiangYunxing && QuanJu.QiYongHuiFuDengJiQiang)
+                                if (dengJiQiangYunXing && QuanJu.QiYongHuiFuDengJiQiang)
                                 {
-                                    if (lzlNeiRong.UidCanShu.DengJi < QuanJu.HuiFuDengJiQiang)
+                                    if (lzlNeiRong.DengJi < QuanJu.HuiFuDengJiQiang)
                                     {
-                                        if (Lib.FaYanShiJianPanDuan(lzlNeiRong.FaTieShiJian, QuanJu.DengJiQiangKaiShiShiJian, QuanJu.DengJiQiangJieShuShiJian))
+                                        if (Lib.FaYanShiJianPanDuan(lzlNeiRong.FaTieShiJianChuo, QuanJu.DengJiQiangKaiShiShiJian, QuanJu.DengJiQiangJieShuShiJian))
                                         {
-                                            lzlDaishan.YuanYin = "楼中楼等级墙:" + lzlNeiRong.UidCanShu.YongHuMing + "(" + lzlNeiRong.UidCanShu.DengJi + ")";
-                                            if (!DaiShanDuiLie.ListIsRepeat(tiezi => neirong.Spid == lzlDaishan.Spid))
+                                            lzlDaishan.YuanYin = "楼中楼等级墙:" + lzlNeiRong.YongHuMing + "(" + lzlNeiRong.DengJi + ")";
+                                            if (!DaiShanDuiLie.ListIsRepeat(tiezi => neiRong.Spid == lzlDaishan.Spid))
                                             {
                                                 DaiShanDuiLie.Add(lzlDaishan);
                                             }
-                                            goto lzltiaoguonr;//去下一个楼中楼
+                                            goto lzlTiaoGuoNeiRong;//去下一个楼中楼
                                         }
                                     }
                                 }
 
                                 //用户名关键词
-                                foreach (string yonghuGjc in GuanJianCi.HeiMingDan)
+                                foreach (var heiMingDan in GuanJianCi.HeiMingDan)
                                 {
-                                    if (string.IsNullOrEmpty(yonghuGjc))
+                                    if (string.IsNullOrEmpty(heiMingDan.GuanJianCi))
                                     {
                                         continue;
                                     }
 
-                                    if (lzlNeiRong.UidCanShu.YongHuMing.Contains(yonghuGjc))
+                                    if (lzlNeiRong.YongHuMing.Contains(heiMingDan.GuanJianCi))
                                     {
-                                        lzlDaishan.YuanYin = "用户名关键词:" + lzlNeiRong.UidCanShu.YongHuMing;
-                                        if (!DaiShanDuiLie.ListIsRepeat(tiezi => neirong.Spid == lzlDaishan.Spid))
+                                        lzlDaishan.YuanYin = "用户名关键词:" + lzlNeiRong.YongHuMing;
+                                        if (!DaiShanDuiLie.ListIsRepeat(tiezi => neiRong.Spid == lzlDaishan.Spid))
                                         {
                                             DaiShanDuiLie.Add(lzlDaishan);
                                         }
-                                        goto lzltiaoguonr;//去下一个楼中楼
+                                        goto lzlTiaoGuoNeiRong;//去下一个楼中楼
                                     }
                                 }
 
                                 //判断帖子内容
-                                foreach (string neirongGjc in GuanJianCi.NeiRong)
+                                foreach (var neiRongGuanJianCi in GuanJianCi.NeiRong)
                                 {
-                                    if (string.IsNullOrEmpty(neirongGjc))
+                                    if (string.IsNullOrEmpty(neiRongGuanJianCi.GuanJianCi))
                                     {
                                         continue;
                                     }
 
-                                    if (lzlNeiRong.NeiRong.Contains(neirongGjc))
+                                    if (lzlNeiRong.NeiRong.Contains(neiRongGuanJianCi.GuanJianCi))
                                     {
-                                        lzlDaishan.YuanYin = "关键词:" + neirongGjc;
-                                        if (!DaiShanDuiLie.ListIsRepeat(tiezi => neirong.Spid == lzlDaishan.Spid))
+                                        lzlDaishan.YuanYin = "关键词:" + neiRongGuanJianCi.GuanJianCi;
+                                        if (!DaiShanDuiLie.ListIsRepeat(tiezi => neiRong.Spid == lzlDaishan.Spid))
                                         {
                                             if (QuanJu.QiYongNeiRongDengJi)
                                             {
-                                                if (lzlNeiRong.UidCanShu.DengJi < QuanJu.NeiRongDengJi)
+                                                if (lzlNeiRong.DengJi < QuanJu.NeiRongDengJi)
                                                 {
                                                     DaiShanDuiLie.Add(lzlDaishan);
-                                                    goto lzltiaoguonr;//去下一个楼中楼
+                                                    goto lzlTiaoGuoNeiRong;//去下一个楼中楼
                                                 }
                                             }
                                             else
                                             {
                                                 DaiShanDuiLie.Add(lzlDaishan);
-                                                goto lzltiaoguonr;//去下一个楼中楼
+                                                goto lzlTiaoGuoNeiRong;//去下一个楼中楼
                                             }
                                         }
                                     }
                                 }
 
-                            lzltiaoguonr:;//去下一个楼中楼的标记
+                            lzlTiaoGuoNeiRong:;//去下一个楼中楼的标记
                             }
 
                             //更新
                             for (int i = 0; i < HuanCun.LzlHuanCunLieBiao.Count; i++)
                             {
-                                if (HuanCun.LzlHuanCunLieBiao[i].Pid == neirong.Pid)
+                                if (HuanCun.LzlHuanCunLieBiao[i].Pid == neiRong.Pid)
                                 {
                                     HuanCun.LzlHuanCunLieBiao[i].HuiFuShu = dangqianLzlHuifushu;
                                     HuanCun.LzlHuanCunLieBiao[i].GengXinShiJian = Convert.ToInt64(BST.QuShiJianChuo());
@@ -1119,10 +1112,10 @@ namespace TiebaManagerMini
                             }
                         }
 
-                    tiaoguonr:;//去下一个回复的标记
+                    tiaoGuoNeiRong:;//去下一个回复的标记
                     }
 
-                tiaoguozt:;//下个帖子的标记
+                tiaoGuoZhuTi:;//下个帖子的标记
                 }
 
                 stopwatch.Stop();
@@ -1159,7 +1152,7 @@ namespace TiebaManagerMini
                     return;
                 }
 
-                BST.DengDai(1000);
+                Thread.Sleep(1000);
             }
         }
 
@@ -1171,7 +1164,7 @@ namespace TiebaManagerMini
         /// <summary>
         /// 删帖队列
         /// </summary>
-        public void Shantie()
+        public void ShanTie()
         {
             while (true)
             {
@@ -1261,21 +1254,21 @@ namespace TiebaManagerMini
             }
             else
             {
-                yongshi = yongshi / 60;
+                yongshi /= 60;
                 if (yongshi < 60)
                 {
                     shuchuStr += yongshi.ToString() + "分";
                 }
                 else
                 {
-                    yongshi = yongshi / 60;
+                    yongshi /= 60;
                     if (yongshi < 24)
                     {
                         shuchuStr += yongshi.ToString() + "时";
                     }
                     else
                     {
-                        yongshi = yongshi / 24;
+                        yongshi /= 24;
                         shuchuStr += yongshi.ToString() + "天";
                     }
                 }
@@ -1287,7 +1280,7 @@ namespace TiebaManagerMini
         /// <summary>
         /// 操作量查询
         /// </summary>
-        public void CaozuoliangChaxun()
+        public void CaoZuoLiangChaXun()
         {
             while (true)
             {
@@ -1325,7 +1318,7 @@ namespace TiebaManagerMini
         /// <summary>
         /// 输出条数
         /// </summary>
-        private int ShuchuTiaoshu = 0;
+        private int ShuChuTiaoShu = 0;
 
         /// <summary>
         /// 信息输出
@@ -1334,13 +1327,13 @@ namespace TiebaManagerMini
         /// <param name="text"></param>
         public void Say(string text)
         {
-            if (ShuchuTiaoshu >= 500)
+            if (ShuChuTiaoShu >= 500)
             {
                 listBox_xinXiShuChu.Items.Clear();
-                ShuchuTiaoshu = 0;
+                ShuChuTiaoShu = 0;
             }
 
-            ShuchuTiaoshu++;
+            ShuChuTiaoShu++;
 
             listBox_xinXiShuChu.Items.Add(BST.ShiJianGeShiHua(2) + " " + text);
             listBox_xinXiShuChu.SelectedIndex = listBox_xinXiShuChu.Items.Count - 1;
@@ -1389,7 +1382,7 @@ namespace TiebaManagerMini
                 Pn = Convert.ToInt32(textBox_liuLanQi_yeMa.Text)
             };
 
-            List<NeiRongJieGou> neiRongLieBiao = tieba.GetTieZiNeiRong(isDaoxu: daoxu, wbgldt: wenBenGuoLvLieBiao);
+            List<NeiRongJieGou> neiRongLieBiao = tieba.GetTieZiNeiRong(out int neiRongZongYeShu, isDaoxu: daoxu, wbgldt: wenBenGuoLvLieBiao);
             if (neiRongLieBiao.Count == 0)
             {
                 MessageBox.Show(text: " 没有获取到回复", caption: "笨蛋雪说：", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Asterisk);
@@ -1398,22 +1391,20 @@ namespace TiebaManagerMini
 
             listView_liuLanQi_liuLanQi.Items.Clear();
             listView_liuLanQi_liuLanQi.BeginUpdate();
-            foreach (NeiRongJieGou neirong in neiRongLieBiao)
+            foreach (NeiRongJieGou neiRong in neiRongLieBiao)
             {
                 ListViewItem lvi = new ListViewItem()
                 {
-                    Text = Convert.ToString(neirong.LouCeng)
+                    Text = Convert.ToString(neiRong.LouCeng)
                 };
 
-                lvi.SubItems.Add(neirong.BiaoTi);
-                lvi.SubItems.Add(neirong.NeiRong);
-                lvi.SubItems.Add(neirong.UidCanShu.YongHuMing);
-                lvi.SubItems.Add(BST.ShiJianChuoDaoWenben(neirong.FaTieShiJian * 1000));
+                lvi.SubItems.Add(neiRong.BiaoTi);
+                lvi.SubItems.Add(neiRong.NeiRong);
+                lvi.SubItems.Add(neiRong.YongHuMing);
+                lvi.SubItems.Add(BST.ShiJianChuoDaoWenben(neiRong.FaTieShiJianChuo * 1000));
                 listView_liuLanQi_liuLanQi.Items.Add(lvi);
             }
             listView_liuLanQi_liuLanQi.EndUpdate();
-
-            neiRongLieBiao = null;
         }
 
         /// <summary>
@@ -1734,6 +1725,63 @@ namespace TiebaManagerMini
         }
 
         /// <summary>
+        /// 标题关键词 菜单 打开前
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Cms_biaoTiGuanJianCi_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (listView_guanJianCi_biaoTiGuanJianCi.SelectedItems.Count == 0)
+            {
+                编辑cms_biaoTiGuanJianCi.Enabled = false;
+                删除cms_biaoTiGuanJianCi.Enabled = false;
+            }
+            else
+            {
+                编辑cms_biaoTiGuanJianCi.Enabled = true;
+                删除cms_biaoTiGuanJianCi.Enabled = true;
+            }
+        }
+
+        /// <summary>
+        /// 内容关键词 菜单 打开前
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Cms_neiRongGuanJianCi_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (listView_guanJianCi_neiRongGuanJianCi.SelectedItems.Count == 0)
+            {
+                编辑cms_neiRongGuanJianCi.Enabled = false;
+                删除cms_neiRongGuanJianCi.Enabled = false;
+            }
+            else
+            {
+                编辑cms_neiRongGuanJianCi.Enabled = true;
+                删除cms_neiRongGuanJianCi.Enabled = true;
+            }
+        }
+
+        /// <summary>
+        /// 用户黑名单 菜单 打开前
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Cms_heiMingDan_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (listView_mingDan_heiMingDan.SelectedItems.Count == 0)
+            {
+                编辑cms_heiMingDan.Enabled = false;
+                删除cms_heiMingDan.Enabled = false;
+            }
+            else
+            {
+                编辑cms_heiMingDan.Enabled = true;
+                删除cms_heiMingDan.Enabled = true;
+            }
+        }
+
+        /// <summary>
         /// 内容关键词变量
         /// </summary>
         /// <param name="sender"></param>
@@ -1752,12 +1800,25 @@ namespace TiebaManagerMini
     /// <summary>
     /// 关键词
     /// </summary>
-    public class GuanJianCi
+    public static class GuanJianCi
     {
-        public static string[] BiaoTi = new string[0];//标题关键词
-        public static string[] NeiRong = new string[0];//内容关键词
-        public static string[] HeiMingDan = new string[0];//用户黑名单
-        public static string[] BaiMingDan = new string[0];//用户白名单
+        public static List<GuanJianCiJieGou> BiaoTi = new List<GuanJianCiJieGou>();//标题关键词
+        public static List<GuanJianCiJieGou> NeiRong = new List<GuanJianCiJieGou>();//内容关键词
+        public static List<GuanJianCiJieGou> HeiMingDan = new List<GuanJianCiJieGou>();//用户黑名单
+        public static List<GuanJianCiJieGou> BaiMingDan = new List<GuanJianCiJieGou>();//用户白名单
+
+        /// <summary>
+        /// 关键词结构
+        /// </summary>
+        public class GuanJianCiJieGou
+        {
+            public string GuanJianCi;
+            public bool IsRegex;
+            public string DengJiYunSuanFu;
+            public int DengJi;
+            public string LouCengYunSuanFu;
+            public int LouCeng;
+        }
     }
 
     /// <summary>
