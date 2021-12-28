@@ -5,7 +5,7 @@
 开发初衷是为了满足部分吧务对纯关键词删帖机的需求
 
 #### 界面
-![软件预览图](https://www.bakasnow.com/tuchuang/tmm.png "tmm.png")
+![软件预览图](https://gitee.com/uploads/images/2018/0430/110915_acde80e0_536443.png "tmm.png")
 
 #### 功能
 1. 格式化帖子让内容更加直观

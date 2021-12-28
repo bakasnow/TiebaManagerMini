@@ -57,14 +57,20 @@
   <PropertyGroup />
   <PropertyGroup />
   <ItemGroup>
+    <Reference Include="BaiduLogin">
+      <HintPath>..\..\0 界面\BaiduLogin\BaiduLogin\bin\Release\BaiduLogin.dll</HintPath>
+    </Reference>
     <Reference Include="BakaSnowTool">
       <HintPath>..\..\Lib\BakaSnowTool\BakaSnowTool\bin\Release\BakaSnowTool.dll</HintPath>
     </Reference>
     <Reference Include="Costura, Version=3.3.1.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
       <HintPath>..\packages\Costura.Fody.3.3.1\lib\net40\Costura.dll</HintPath>
     </Reference>
-    <Reference Include="DBHelper">
-      <HintPath>..\..\Lib\DBHelper\DBHelper\bin\Release\DBHelper.dll</HintPath>
+    <Reference Include="HttpHelper">
+      <HintPath>..\..\Lib\HttpHepler v2.2\CsharpHttpHelper\bin\Release\HttpHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="IniHelper">
+      <HintPath>..\..\Lib\IniHelper\IniHelper\bin\Release\IniHelper.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -74,18 +80,14 @@
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
     <Reference Include="TiebaLib">
       <HintPath>..\..\Lib\TiebaLib\TiebaLib\bin\Release\TiebaLib.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="WinForm\BaiduLogin.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WinForm\BaiduLogin.Designer.cs">
-      <DependentUpon>BaiduLogin.cs</DependentUpon>
-    </Compile>
+    <Compile Include="PeiZhi.cs" />
     <Compile Include="WinForm\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,19 +95,17 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="HuanCun.cs" />
-    <Compile Include="Lib.cs" />
+    <Compile Include="KuoZhan.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuanJu.cs" />
-    <Compile Include="WinForm\CaiDan\WenBenGuoLv.cs">
+    <Compile Include="WinForm\TiebaZhangHaoGuanLiForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WinForm\CaiDan\WenBenGuoLv.Designer.cs">
-      <DependentUpon>WenBenGuoLv.cs</DependentUpon>
+    <Compile Include="WinForm\TiebaZhangHaoGuanLiForm.Designer.cs">
+      <DependentUpon>TiebaZhangHaoGuanLiForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="WinForm\BaiduLogin.resx">
-      <DependentUpon>BaiduLogin.cs</DependentUpon>
-    </EmbeddedResource>
+    <Compile Include="ZhangHao.cs" />
     <EmbeddedResource Include="WinForm\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -119,8 +119,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="WinForm\CaiDan\WenBenGuoLv.resx">
-      <DependentUpon>WenBenGuoLv.cs</DependentUpon>
+    <EmbeddedResource Include="WinForm\TiebaZhangHaoGuanLiForm.resx">
+      <DependentUpon>TiebaZhangHaoGuanLiForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="packages.config" />
